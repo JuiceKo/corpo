@@ -1,13 +1,24 @@
-<h1> Adhérents </h1>
+<div class="container mx-auto px-4">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Adhérents</h1>
+    <%= link_to "Retour à l'accueil", root_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
 
-<%= form_tag(corporation_path(@corporation), method: :get) do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Rechercher par nom d'adhérent ou nom/prénom de formulaire" %>
-  <%= submit_tag "Rechercher" %>
-<% end %>
-
-<% @adherents.each do |adherent| %>
-  <h2> <%= adherent.nom %> </h2>
-  <% adherent.formulaires.each do |formulaire| %>
-    <p> <%= formulaire.nom_prenom %> - <%= formulaire.annee %> </p>
+  <%= search_form_for @q, url: corporation_path(@corporation), html: { class: "search-form mb-6" } do |f| %>
+    <div class="flex">
+      <%= f.search_field :nom_or_numero_adherent_cont, placeholder: "Rechercher par nom ou numéro adhérent", class: "search-field w-full px-4 py-2 rounded border border-gray-300" %>
+      <%= f.submit "Rechercher", class: "search-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2" %>
+    </div>
   <% end %>
-<% end %>
+
+  <% @adherents.each do |adherent| %>
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-2"><%= adherent.nom %></h2>
+      <p class="text-gray-600 mb-2"><%= adherent.numero_adherent %></p>
+
+      <% adherent.formulaires.each do |formulaire| %>
+        <p class="text-gray-700"><%= formulaire.nom_prenom %> - <%= formulaire.annee %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

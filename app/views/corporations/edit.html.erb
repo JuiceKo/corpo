@@ -1,0 +1,12 @@
+<div class="container mx-auto px-4">
+  <h1 class="text-3xl font-bold mb-6">Modifier le nom de la corporation</h1>
+  <%= form_with(:model => @corporation, :data   => { turbo: true, turbo_confirm: "Are you Sure?" } ,local: true) do |form| %>
+    <div class="mb-4">
+      <%= form.label :nom, "Nom actuel : #{@corporation.nom}", class: "block text-gray-700 text-sm font-bold mb-4" %>
+      <%= form.text_field :nom, class: "form-input w-full mb-4" %>
+    </div>
+    <div class="flex justify-end">
+      <%= form.submit "Enregistrer", data: { confirm: "Are you sure?" }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded" %>
+    </div>
+  <% end %>
+</div>

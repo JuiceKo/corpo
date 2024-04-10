@@ -1,16 +1,17 @@
-<h1> Corporations </h1>
+<div class="container mx-auto px-4">
+  <h1 class="text-3xl font-bold mb-6">Corporations</h1>
 
-<% @corporations.each do |corpo| %>
-  <h2> <%= corpo.nom %> </h2>
-  <%= form_with(model: @corporation, local: true) do |form| %>
-    <script type="module" src="/assets/index_corporations.js"></script>
-    <div id="nom-fields">
-      <%= form.text_field :nom, id: "nom-field", style: "display: none;" %>
-      <%= form.submit "Sauvegarder", id: "sauvegarder-btn", style: "display: none;" %>
+  <% @corporations.each do |corpo| %>
+    <div id="modifier-fields-<%= corpo.id %>">
+      <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+        <h2 class="text-xl font-semibold mb-2"><%= corpo.nom.upcase %></h2>
+
+        <%= link_to "Modifier le nom", edit_corporation_path(corpo), class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
+
+        <p class="text-gray-600 mt-4">Nombre d'adhérents : <%= corpo.adherents.count %></p>
+
+        <%= link_to "Voir les adhérents", corporation_path(corpo), class: "text-blue-500 font-semibold hover:underline" %>
+      </div>
     </div>
-    <%= button_tag "Modifier", id: "modifier-btn" %>
   <% end %>
-  <p> Nombre d'adhérents : <%= corpo.adherents.count %></p>
-  <%= link_to "Voir les adhérents", corporation_path(corpo), class: "text-blue-500 font-semibold hover:underline" %>
-<% end %>
-
+</div>
