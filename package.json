@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "jquery": "^3.7.1"
+  },
+  "name": "form",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "JuiceKo <didierjean.bastien@gmail.com>",
+  "license": "MIT"
+}

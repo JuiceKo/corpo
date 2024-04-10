@@ -1,0 +1,2 @@
+class Donnee < ApplicationRecord
+end

@@ -1,0 +1,16 @@
+<h1> Corporations </h1>
+
+<% @corporations.each do |corpo| %>
+  <h2> <%= corpo.nom %> </h2>
+  <%= form_with(model: @corporation, local: true) do |form| %>
+    <script type="module" src="/assets/index_corporations.js"></script>
+    <div id="nom-fields">
+      <%= form.text_field :nom, id: "nom-field", style: "display: none;" %>
+      <%= form.submit "Sauvegarder", id: "sauvegarder-btn", style: "display: none;" %>
+    </div>
+    <%= button_tag "Modifier", id: "modifier-btn" %>
+  <% end %>
+  <p> Nombre d'adhérents : <%= corpo.adherents.count %></p>
+  <%= link_to "Voir les adhérents", corporation_path(corpo), class: "text-blue-500 font-semibold hover:underline" %>
+<% end %>
+

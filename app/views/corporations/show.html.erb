@@ -1,0 +1,13 @@
+<h1> Adhérents </h1>
+
+<%= form_tag(corporation_path(@corporation), method: :get) do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Rechercher par nom d'adhérent ou nom/prénom de formulaire" %>
+  <%= submit_tag "Rechercher" %>
+<% end %>
+
+<% @adherents.each do |adherent| %>
+  <h2> <%= adherent.nom %> </h2>
+  <% adherent.formulaires.each do |formulaire| %>
+    <p> <%= formulaire.nom_prenom %> - <%= formulaire.annee %> </p>
+  <% end %>
+<% end %>
