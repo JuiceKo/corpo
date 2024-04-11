@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "corporation" %>
 <div class="container mx-auto px-4">
   <h1 class="text-3xl font-bold mb-6">Corporations</h1>
 
@@ -10,7 +11,7 @@
 
         <p class="text-gray-600 mt-4">Nombre d'adhérents : <%= corpo.adherents.count %></p>
 
-        <%= link_to "Voir les adhérents", corporation_path(corpo), class: "text-blue-500 font-semibold hover:underline" %>
+        <%= link_to "Voir les adhérents", corporation_path(corpo), data: { turbo: false }, class: "text-blue-500 font-semibold hover:underline" %>
       </div>
     </div>
   <% end %>

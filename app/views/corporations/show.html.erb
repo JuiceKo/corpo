@@ -20,7 +20,7 @@
 
         <%= select_tag "form-year-#{adherent.id}", options_for_select(adherent.formulaires.pluck(:annee)), class: "form-select block w-full mt-1 mb-4 year-select", data: { "corporation-id" => @corporation.id, "adherent-id" => adherent.id } %>
 
-        <%= link_to "Voir", "#", id: "voir-link-#{adherent.id}", class: "voir-link bg-blue-500 text-white font-bold py-2 px-4 mt-6 rounded", data: { "adherent-id" => adherent.id } %>
+        <span class="voir-link bg-blue-500 text-white font-bold py-2 px-4 mt-6 rounded voir-link-hover" data-adherent-id="<%= adherent.id %>" data-corporation-id="<%= @corporation.id %>">Voir</span>
       </div>
     </div>
   <% end %>
