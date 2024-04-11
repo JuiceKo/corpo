@@ -12,13 +12,17 @@
   <% end %>
 
   <% @adherents.each do |adherent| %>
+    <script src="<%= asset_path('index_corporations.js') %>"></script>
     <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-      <h2 class="text-xl font-semibold mb-2"><%= adherent.nom %></h2>
-      <p class="text-gray-600 mb-2"><%= adherent.numero_adherent %></p>
+      <div class="mb-6 border-b border-gray-300 pb-6">
+        <h2 class="text-xl font-semibold mb-2"><%= adherent.nom %></h2>
+        <p class="text-gray-600 mb-2"><%= adherent.numero_adherent %></p>
 
-      <% adherent.formulaires.each do |formulaire| %>
-        <p class="text-gray-700"><%= formulaire.nom_prenom %> - <%= formulaire.annee %></p>
-      <% end %>
+        <%= select_tag "form-year-#{adherent.id}", options_for_select(adherent.formulaires.pluck(:annee)), class: "form-select block w-full mt-1 mb-4 year-select", data: { "corporation-id" => @corporation.id, "adherent-id" => adherent.id } %>
+
+        <%= link_to "Voir", "#", id: "voir-link-#{adherent.id}", class: "voir-link bg-blue-500 text-white font-bold py-2 px-4 mt-6 rounded", data: { "adherent-id" => adherent.id } %>
+      </div>
     </div>
   <% end %>
 </div>
+

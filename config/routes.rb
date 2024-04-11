@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :corporations do
     resources :adherents do
-      resources :formulaires
+      resources :formulaires, only: [:show], param: :year
     end
   end
 end
