@@ -5,12 +5,16 @@ class FormulairesController < ApplicationController
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
     @formulaire = @adherent.formulaires.find_by(annee: params[:year])
+    all_data = @corporation.donnees
+    @max_year_data = all_data.order(annee: :desc).first if all_data.any?
   end
 
   def new
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
     @formulaire = Formulaire.new
+    all_data = @corporation.donnees
+    @max_year_data = all_data.order(annee: :desc).first if all_data.any?
   end
 
   def create

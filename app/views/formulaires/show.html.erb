@@ -1,6 +1,8 @@
 <%= link_to "Modifier", edit_corporation_adherent_formulaire_path(@corporation, @adherent, @formulaire), class: "search-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2" %>
 <div class="bg-white shadow-md rounded-lg p-6 mb-6">
   <h2 class="text-xl font-semibold mb-2">Détails du formulaire</h2>
+  <h3> <%= @max_year_data.nom_formulaire %> </h3>
+  <%= @max_year_data.banque %> <br>
   <%= @formulaire.id %></p>
   <p><strong>Nom Prénom:</strong> <%= @formulaire.nom_prenom %></p>
   <p><strong>Année:</strong> <%= @formulaire.annee %></p>

@@ -1,5 +1,8 @@
 <h1> Ajout d'un nouvel adhérent </h1>
 <%= form_with(model: [@corporation, @adherent], url: create_avec_adherent_corporation_adherents_path(@corporation), local: true) do |form| %>
+
+  <%= @max_year_data.nom_formulaire %> <br>
+
   <%= form.label :nom, "Nom Prénom" %>
   <%= form.text_field :nom %>
 

@@ -3,6 +3,8 @@ class AdherentsController < ApplicationController
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.new(corporation: @corporation)
     @formulaire = @adherent.formulaires.build
+    all_data = @corporation.donnees
+    @max_year_data = all_data.order(annee: :desc).first if all_data.any?
   end
 
   def create_avec_adherent

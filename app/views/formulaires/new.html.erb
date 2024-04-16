@@ -2,6 +2,8 @@
 
 <%= form_with(model: [@corporation, @adherent, @formulaire], url: corporation_adherent_formulaires_path(@corporation, @adherent), local: true) do |form| %>
 
+  <%= @max_year_data.nom_formulaire %> <br>
+
   <div class="field">
     <%= form.label :nom_prenom, "Nom" %>
     <%= form.text_field :nom_prenom %>
