@@ -2,6 +2,11 @@ class CorporationsController < ApplicationController
 
   def index
     @corporations = Corporation.all
+    @corporations = Corporation.includes(:donnees)
+    @latest_donnees = {}
+    @corporations.each do |corporation|
+      @latest_donnees[corporation.id] = corporation.donnees.order(annee: :desc).first
+    end
     @corporations = Corporation.includes(:adherents)
   end
 
@@ -9,6 +14,10 @@ class CorporationsController < ApplicationController
     @corporation = Corporation.find(params[:id])
     @q = @corporation.adherents.ransack(params[:q])
     @adherents = @q.result(distinct: true).includes(:formulaires)
+    @adherent_years = {}
+    @adherents.each do |adherent|
+      @adherent_years[adherent.id] = adherent.formulaires.pluck(:annee).uniq.sort.reverse
+    end
   end
 
   def edit

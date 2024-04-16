@@ -1,0 +1,8 @@
+<%= debug @formulaire %>
+
+<%= form_with(model: [@corporation, @adherent, @formulaire], url: corporation_adherent_formulaire_path(@corporation, @adherent, @formulaire), method: :patch) do |form| %>  <%= form.label :nom_prenom, 'Nom et Prénom' %>
+  <%= form.text_field :nom_prenom %>
+  <%= form.label :nom_prenom, 'Année' %>
+  <%= form.text_field :annee %>
+  <%= form.submit "Mettre à jour" %>
+<% end %>

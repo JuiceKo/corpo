@@ -5,7 +5,10 @@
   <% @corporations.each do |corpo| %>
     <div id="modifier-fields-<%= corpo.id %>">
       <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-        <h2 class="text-xl font-semibold mb-2"><%= corpo.nom.upcase %></h2>
+        <% latest_donnee = @latest_donnees[corpo.id] %>
+        <% if latest_donnee %>
+          <h2 class="text-xl font-semibold mb-2"><%= latest_donnee.nom_formulaire.upcase %></h2>
+        <% end %>
 
         <%= link_to "Modifier le nom", edit_corporation_path(corpo), class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
 
