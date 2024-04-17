@@ -2,3 +2,468 @@
     background-color: #4a86e8;
     cursor: pointer;
 }
+
+/* ----------------------------------------------- STYLE GÉNÉRAL ----------------------------------------------- */
+.custom-text-field {
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    color: black;
+    box-sizing: border-box;
+    outline: none;
+    padding: 0px;
+    padding-left: 5px;
+    padding-top: 4px;
+    flex: 1;
+    --tw-shadow: none;
+}
+
+.custom-text-field:focus {
+    outline: 2px solid #e95e2c;
+}
+
+
+.field {
+    display: flex;
+    margin-top: 15px;
+}
+
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-top: calc((1em - 1px) / 4);
+    width: 0.85em;
+    height: 0.85em;
+    border: 1px solid black;
+}
+
+
+input[type="radio"]:hover,
+input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+
+/* ----------------------------------------------- FORMULAIRE ----------------------------------------------- */
+
+.AIO    {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    padding: 20px;
+}
+
+/* ---------------------------------------- HEADER ---------------------------------------- */
+
+.haut {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F6F6F6;
+}
+
+.images {
+    display: -webkit-box;
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.img-gauche, .img-droite {
+    flex: 1;
+}
+
+.img-img-droite {
+    margin-left: auto;
+}
+
+.img-gauche img, .img-droite img {
+    max-width: 100%;
+}
+
+.haut > h1 {
+    font-size: 35px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    margin-bottom: 15px;
+    color: #2c2e35;
+
+}
+
+
+/* ---------------------------------------- PART 1 ---------------------------------------- */
+
+.part1 {
+    display: flex;
+    flex-direction: column;
+    background-color: #F6F6F6;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c2e35;
+}
+
+.l {
+    display: flex;
+}
+
+.l > .sixp {
+    flex: 70%;
+}
+
+.l > .quatrep {
+    flex: 30%;
+}
+
+.sixp {
+    display: flex;
+}
+
+.quatrep {
+    display: flex;
+}
+
+/* ---------------------------------------- PART 2 ---------------------------------------- */
+
+.part2 {
+    background-color: #F6F6F6;
+    font-size: 20px;
+    color: #2c2e35;
+}
+
+
+.field > .sixp {
+    flex: 50%
+}
+
+.field > .quatrep {
+    flex: 50%
+}
+
+.sixp2 {
+    padding-right: 10%;
+}
+
+.statut {
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+}
+
+
+/* ---------------------------------------- PART 3 ---------------------------------------- */
+
+.part3 {
+    background-color: #F6F6F6;
+    font-size: 20px;
+    color: #2c2e35;
+}
+
+.form-options {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.form-options > *:not(:first-child):not(:last-child) {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.field > input[type="radio"] {
+    margin-right: 10px;
+}
+
+.petit {
+    font-size: 15px;
+    font-style: italic;
+}
+
+/* ---------------------------------------- PART 4 ---------------------------------------- */
+
+.part4 {
+    background-color: #F6F6F6;
+    font-size: 20px;
+    color: #2c2e35;
+}
+
+.cotisation-copama {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.cotisation-copama p.bold {
+    font-weight: bold;
+    margin: 0;
+    margin-left: 5px;
+}
+
+.cotisation-copama2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.signature {
+    margin-top: 40px;
+}
+/* ---------------------------------------- PART 5 ---------------------------------------- */
+
+.part5 {
+    background-color: #F6F6F6;
+    font-size: 20px;
+    color: #2c2e35;
+}
+
+.cotisation {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px
+}
+
+.sous-cotisation {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+.etoile {
+    margin-left: 50px;
+    font-size: 15px;
+}
+
+.coti-rb {
+    margin-right: 10px;
+}
+
+.iban {
+    margin-left: 28px;
+}
+
+.espace {
+    margin-right: 25px;
+}
+
+.cadre-coti {
+    border: thick double #1858ac;
+    margin-left: 50px;
+    margin-right : 50px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    text-align: justify;
+
+
+}
+
+.boulanger {
+    border: thick double #e1ce86;
+
+}
+
+.h3-coti {
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.petit2 {
+    font-size: 15px;
+    font-style: italic;
+    margin-left: 50px;
+}
+
+.centrer {
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.verso {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.verso h3 {
+    margin-right: 10px;
+}
+
+
+
+/* ---------------------------------------- PART 6 ---------------------------------------- */
+
+
+.p2-h3 {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.part6 {
+    background-color: #F6F6F6;
+    border: thick double #1858ac;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 25px;
+    font-size: 20px;
+    text-align: justify;
+    color: #2c2e35;
+
+}
+
+.part6 > boulanger {
+    border: thick double #e1ce86;
+}
+
+.cb-bas {
+    color: #1858ac;
+    font-weight: bold;
+}
+
+.part6 > input[type="checkbox"] {
+    border: 2px solid #1858ac;
+    outline: none;
+}
+
+/* ---------------------------------------- PART 7 ---------------------------------------- */
+
+.part7 {
+    background-color: #F6F6F6;
+    border: dashed #ee8661 4px;
+    padding: 25px;
+    font-size: 15px;
+    color: #2c2e35;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.part7 > h1 {
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.psepa {
+    margin-bottom: 25px;
+}
+
+.sepa {
+    display: flex;
+    flex-direction: row;
+}
+
+.sepa-part {
+    margin-bottom: 10px;
+}
+
+.sepa > .sepa20 {
+    display: flex;
+    flex: 15%;
+    padding-top: 5px ;
+}
+
+.sepa > .sepa80 {
+    display: flex;
+    flex: 85%;
+}
+
+
+.sepa-orange {
+    display: flex;
+    flex-direction: row;
+}
+
+.sepa-orange > .sepa20 {
+    display: flex;
+    flex: 15%;
+}
+
+.sepa-orange > .sepa80 {
+    display: flex;
+    flex: 85%;
+}
+
+.ligne-orange {
+    border-bottom: 3px solid #ee8661;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 75px;
+    margin-left: 75px;
+}
+
+
+.AIO h2  {
+    border-bottom: 2px solid black;
+    font-size: 35px;
+    margin-top: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-break {
+    page-break-after: always;
+}
+
+.boutton-importer {
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 15px;
+
+}
+
+.boutton-importer:hover {
+    background-color: #609af7;
+    cursor: pointer;
+}
+
+.form-index {
+    flex-direction: row;
+}
+
+.custom-text-field:focus {
+    outline: none;
+}
+
+
+
+.copama {
+    color: #e95e2c ;
+}

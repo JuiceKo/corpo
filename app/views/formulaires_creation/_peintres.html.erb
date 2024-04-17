@@ -1,0 +1,340 @@
+<%= stylesheet_link_tag "corporation" %>
+
+<div class="AIO">
+  <%= form_with(model: [@corporation, @adherent, @formulaire], url: corporation_adherent_formulaires_path(@corporation, @adherent), local: true) do |form| %>
+    <%= stylesheet_link_tag "corporation" %>
+
+    <div class="haut">
+      <div class="images">
+        <div class="img-gauche" >
+          <img src="data:image/png;base64,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" alt="Grapefruit slice atop a pile of other slices" />
+        </div>
+        <div class="img-droite" >
+          <img class="img-img-droite" src="data:image/png;base64,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" alt="Grapefruit slice atop a pile of other slices" />
+        </div>
+      </div>
+      <h1> <%= @max_year_data.nom_formulaire %> <%= Date.current.year %> </h1>
+    </div>
+
+    <!---------------------------------- PART 1 --------------------------------------------->
+
+    <div class="corp">
+      <div class="part1">
+        <div class="l">
+          <div class="sixp">
+            <p> A compléter et à retourner à :</p>
+          </div>
+          <div class="quatrep">
+            <%= form.label :raison_sociale, "Raison Sociale" %>
+            <%= form.text_field :raison_sociale, readonly: @show_mode, disabled: @show_mode, class: "appearance-none", class: 'custom-text-field'%>
+          </div>
+        </div>
+
+        <div class="l">
+          <div class="sixp">
+            <p><%= @max_year_data.nom_formulaire %></p>
+          </div>
+          <div class="quatrep">
+            <%= form.label :nom_prenom, "Nom Prénom" %>
+            <%= form.text_field :nom_prenom, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+          </div>
+        </div>
+
+        <div class="l">
+          <div class="sixp">
+            <p> <%= @max_year_data.adresse%></p>
+          </div>
+          <div class="quatrep">
+            <%= form.label :adresse, "Adresse" %>
+            <%= form.text_field :adresse, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+          </div>
+        </div>
+
+        <div class="l">
+          <div class="sixp">
+            <p></p>
+          </div>
+          <div class="quatrep">
+            <%= form.label :cp_ville, "CP Ville" %>
+            <%= form.text_field :cp_ville, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!---------------------------------- PART 2 --------------------------------------------->
+
+    <div class="part2">
+      <h2 class="copama">Vous </h2>
+      <div class="field">
+        <div class="sixp sixp2">
+          <%= form.label :telephone, "Numéro téléphone :" %>
+          <%= form.telephone_field :telephone, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+        </div>
+        <div class="quatrep">
+          <%= form.label :portable, "Numéro portable :" %>
+          <%= form.telephone_field :portable, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="sixp sixp2">
+          <%= form.label :email, "E-mail : " %>
+          <%= form.email_field :email, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+        </div>
+        <div class="quatrep"></div>
+      </div>
+
+      <div class="field">
+        <%= form.label :statut, "Statut du chef d'entreprise * :"%>
+        <%= form.radio_button :statut, 'Non-salarié', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, class:"statut" %> Non-salarié
+        <%= form.radio_button :statut, 'Salarié', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, class:"statut" %> Salarié
+      </div>
+    </div>
+
+    <!---------------------------------- PART 3 --------------------------------------------->
+
+    <div class="part3">
+      <h2 class="copama"> Votre entreprise</h2>
+      <div class="form-options">
+        <%= form.label :forme_juridique, "Forme juridique :" %>
+        <%= form.radio_button :forme_juridique, 'Ent. ind.', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> Ent. ind.<br>
+        <%= form.radio_button :forme_juridique, 'EIRL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> EIRL<br>
+        <%= form.radio_button :forme_juridique, 'EURL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> EURL<br>
+        <%= form.radio_button :forme_juridique, 'SARL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SARL<br>
+        <%= form.radio_button :forme_juridique, 'SAS', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SAS<br>
+        <%= form.radio_button :forme_juridique, 'SASU', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SASU<br>
+        <%= form.radio_button :forme_juridique, 'Autre', class: 'form-check-input', id: 'autre-option', readonly: @show_mode, disabled: @show_mode %> Autre :
+        <%= form.text_field :forme_juridique, { class: 'text-field custom-text-field', disabled: true }%>
+      </div>
+
+
+
+      <div class="field">
+        <div class="sixp sixp2">
+          <%= form.label :code_naf_ape, "Code NAF / APE : " %>
+          <%= form.text_field :code_naf_ape, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+        </div>
+        <div class="quatrep">
+          <%= form.label :siret, " SIRET : " %>
+          <%= form.text_field :siret, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="sixp sixp2">
+          <%= form.label :nb_salaries, "Nombre de salariés * : " %>
+          <%= form.text_field :nb_salaries, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+        </div>
+        <div class="quatrep">
+          <%= form.label :nb_apprentis, "dont  " %>
+          <%= form.text_field :nb_apprentis, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>apprentis
+        </div>
+      </div>
+      <div class="field">
+        <p class="petit"> *Ces informations sont uniquement utilisées pour le calcul de la représentativité du métier</p>
+      </div>
+    </div>
+
+    <!---------------------------------- PART 4 --------------------------------------------->
+
+    <!---------------------------------- PART 5 --------------------------------------------->
+
+
+
+    <div class="part5">
+      <h2 class="copama"> Mode paiement </h2>
+
+
+      <div class="cotisation">
+        <div class="sous-cotisation">
+          <%= form.radio_button :mode_paiement, 'prelevement_automatique_mensuel', class: 'form-check-input coti-rb', readonly: @show_mode, disabled: @show_mode %> <p> <b> Prélèvement automatique mensuel </b> (mandat au verso à compléter, signer et à retourner avec votre RIB**) </p>
+        </div>
+        <p class="etoile"> ** Prélèvement effectué de janvier à novembre soit sur 11 mois </p>
+        <br>
+        <div class="sous-cotisation">
+          <%= form.radio_button :mode_paiement, 'cheque', class: 'form-check-input coti-rb', readonly: @show_mode, disabled: @show_mode %> <p> <b>Chèque</b> à l'odre de la <%= @max_year_data.nom_formulaire %> </p>
+        </div>
+        <br>
+        <div class="sous-cotisation">
+          <%= form.radio_button :mode_paiement, 'virement_bancaire', class: 'form-check-input coti-rb', readonly: @show_mode, disabled: @show_mode %> <p> <b> Virement bancaire</b> <%= @max_year_data.banque %> </p>
+        </div>
+        <b class="iban"> IBAN : <%= @max_year_data.iban %> - BIC : <%= @max_year_data.bic %> </b>
+      </div>
+
+      <div class="cadre-coti boulanger">
+        <h3 class="h3-coti"> Option assurance protection juridique (voir documents joints)</h3>
+        <p><b>Pour souscrire à la protection juridique, vous trouverez un bulletin d'adhésion en pièce jointe de ce bulletin. </b> Pour une vue synthétique des garanties offertes par l'assurance protection juridique, référez-vous à la brochure jointe. </p>
+      </div>
+
+      <p class="petit2"> L'adhésion est valable pour l'année civile et se renouvelle automatiquement par tacite reconduction à l'échéance. </p>
+      <b class="centrer">Je déclare m'affilier à la <%= @max_year_data.nom_formulaire %> et je bénéficie ainsi de l'adhésion combinée à la CAPEB du Haut-Rhin. </b>
+
+      <div class="field l">
+        <div class="sixp">
+          <%= form.label :lieu, "Fait à : " %>
+          <%= form.text_field :lieu, readonly: @show_mode, disabled: @show_mode,  class: 'custom-text-field' %>
+
+          <%= form.label :date, "Date :" %>
+          <%= form.text_field :date, class: 'date-input', pattern: '\d{2}/\d{2}/\d{4}', placeholder: 'Format : jj/mm/aaaa', readonly: @show_mode, disabled: @show_mode,  class: 'custom-text-field' %>
+        </div>
+        <div class="quatrep"></div>
+      </div>
+
+      <p class="signature"> Signature : </p>
+      <div class="verso">
+        <h3> Verso à Compléter </h3> <img src="<%= asset_path('664866.png') %>" width="70" height="70" alt="fleche">
+      </div>
+
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="part6 boulanger">
+      <h3 class="p2-h3"> Politique de confidentialié du traitement des données personnelles : </h3>
+      <br>
+      <p>Les informations recueillies sont nécessaires por permettre à la corporation de taiter et gérer votre adhésion, vos abonnements, l'envoi de lettres d'information sur les acions menées mais aussi, votre accès aux différents produits et services qu'elle met à votre disposition. Pour ce faire, la corporation dispose de moyens informatiques. Dans ce cadre, vos données personelles sont susceptibles d'être transmises à des sous-traitants ou prestataires.</p>
+      <br>
+      <p> Ces informations et données personnelles sont également conservées à des fins de gestion des organisations professionnelles, afin de respecter les obligations légales et réglementaires. Elles seront conservées aussi longtemps que nécessaire pour la gestion des oranisations. </p>
+      <br>
+      <p>Conformément aux dispostions de la loi "Informatique et Libertés" du 6 janvier 1978 modifiée (UE) n°2016/679, vous disposez d'un droit d'accès, de rectification, du suppresion, de limitation du traitement à certains cas de figure, de retrait de votre consentement et de portabilité des données vous concernant. Vous disposez également d'un droi au testament numérique (traitement de vos données post-mortem).</p>
+      <br>
+      <p>Si vous souhaitez exercer ces droits, ou vous désabonner de la newsletter, adressez-vous au Reponsable de traitement des données par e-mail à : <b> corpos@artifrance.fr</b></p>
+      <br>
+      <p> Vous diposez également d'un droit de recours auprès du CNIL en cas de violation de la réglementation applicable en matière de protection des donénes personnelles et notamment du RGPD.</p>
+      <br>
+
+
+      <%= form.check_box :terms, disabled: @show_mode %>
+      <%= form.label :terms, "Je déclare accepter la transmission de mes données personnelles à des partenaires de la coporation uniquement aux fins de campagnes d'information, d'enquêtes, de publication dans des annuaires professionnels, ou de diffusion de brochures pour bénéficier d'avantages tarifaires. ", class:"cb-bas" %>
+    </div>
+
+
+
+    <div class="part7 boulanger2">
+      <h1> Mandat de Prévèlevement SEPA</h1>
+
+      <p class="psepa"> En signant ce formulaire de mandat, vous autorisez CORPORATIONS UGA à envoyer des instructions à votre banque pour débiter votre compte, et votre banque à débiter votre conformément aux instructions de CORPORATIONS UGA. Vous bénéficiez du droit d'être remboursé par votre banque selon les conditions décrites dans la convention que vous avez passée avec elle. Une demande de remboursement doit être présentée dans les 8 semaines suivant la date de débit de vitre compte pour un prélèvement autorisé. </p>
+
+      <div class="sepa sepa-part">
+        <div class="sepa20">
+          <%= form.label :titulaire_compte, "Titulaire du compte : " %>
+        </div>
+        <div class="sepa80">
+          <%= form.text_field :titulaire_compte, readonly: @show_mode, disabled: @show_mode,  class: 'custom-text-field' %>
+        </div>
+      </div>
+
+      <div class="sepa">
+        <div class="sepa20">
+          <%= form.label :adresse_sepa, "Adresse postale : " %>
+        </div>
+        <div class="sepa80">
+          <%= form.text_field :adresse_sepa, readonly: @show_mode, disabled: @show_mode,  class: 'custom-text-field' %>
+        </div>
+      </div>
+
+      <div class="sepa">
+        <div class="sepa20"><p></p></div>
+        <div class="sepa80"><p> Numéro et nom de la rue </p></div>
+      </div>
+
+      <div class="sepa">
+        <div class="sepa20"> <p></p></div>
+        <div class="sepa80">
+          <%= form.text_field :cp_ville_sepa, readonly: @show_mode, disabled: @show_mode,  class: 'custom-text-field' %>
+        </div>
+      </div>
+
+      <div class="sepa  sepa-part">
+        <div class="sepa20"><p></p></div>
+        <div class="sepa80"><p> Code postal et Ville </p></div>
+      </div>
+
+      <div class="sepa">
+        <div class="sepa20"><p> Pays : </p></div>
+        <div class="sepa80"><b> FRANCE </b></div>
+      </div>
+
+
+      <div class="sepa">
+        <div class="sepa20">
+          <%= form.label :iban_sepa, "Coordonnées bancaires : " %>
+        </div>
+        <div class="sepa80">
+          <%= form.text_field :iban_sepa, readonly: @show_mode, disabled: @show_mode, class: 'custom-text-field' %>
+        </div>
+      </div>
+
+      <div class="sepa  sepa-part">
+        <div class="sepa20"><p></p></div>
+        <div class="sepa80"><p> Numéro d'identification international du compte bancaire - IBAN ( International Bank Account Number) </p></div>
+      </div>
+
+      <div class="sepa">
+        <div class="sepa20"><p></p></div>
+        <div class="sepa80">
+          <%= form.text_field :bic_sepa, readonly: @show_mode, disabled: @show_mode,  class: 'custom-text-field' %>
+        </div>
+      </div>
+
+      <div class="sepa  sepa-part">
+        <div class="sepa20"><p></p></div>
+        <div class="sepa80"><p> Code International d'identification de votre compte - BIC (Bank Identifier Code) </p></div>
+      </div>
+
+      <div class="ligne-orange"></div>
+
+      <div class="sepa-orange  sepa-part">
+        <div class="sepa20"><p>Nom du Créancier :</p></div>
+        <div class="sepa80"><p> <%= @max_year_data.nom_creancier %> </p></div>
+      </div>
+
+      <div class="sepa-orange  sepa-part">
+        <div class="sepa20"><p> Identifiant du créancier : </p></div>
+        <div class="sepa80"><p> <%= @max_year_data.id_creancier %> </p></div>
+      </div>
+
+      <div class="sepa-orange  sepa-part">
+        <div class="sepa20"><p> Adresse du créancier : </p></div>
+        <div class="sepa80"><p> <%= @max_year_data.addresse_creancier %> </p></div>
+      </div>
+
+      <div class="sepa-orange  sepa-part">
+        <div class="sepa20"><p> Pays du créancier :</p></div>
+        <div class="sepa80"><p> <%= @max_year_data.pays_creancier.upcase %> </p></div>
+      </div>
+
+      <div class="sepa-orange  sepa-part">
+        <div class="sepa20"><p> Type de paiement :</p></div>
+        <div class="sepa80"><p> <%= @max_year_data.type_paiement %> </p></div>
+      </div>
+
+      <div class="ligne-orange"></div>
+
+      <div class="sepa">
+        <div class="sepa20">
+          <%= form.label :lieu_date_sepa, "Fait à : " %>
+        </div>
+        <div class="sepa80">
+          <%= form.text_field :lieu_date_sepa, readonly: @show_mode, disabled: @show_mode,  class: 'custom-text-field' %>
+        </div>
+      </div>
+
+      <div class="sepa  sepa-part">
+        <div class="sepa20"><p></p></div>
+        <div class="sepa80"><p> Lieu et date </p></div>
+      </div>
+
+      <div class="sepa">
+        <div class="sepa20">
+          <p> Signature: </p>
+        </div>
+      </div>
+    </div>
+
+    <%= form.submit "Créer un formulaire" %>
+
+  <% end %>
+</div>

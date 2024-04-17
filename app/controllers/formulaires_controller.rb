@@ -7,6 +7,8 @@ class FormulairesController < ApplicationController
     @formulaire = @adherent.formulaires.find_by(annee: params[:year])
     all_data = @corporation.donnees
     @max_year_data = all_data.order(annee: :desc).first if all_data.any?
+    @donnees = Donnee.where(corporation_id: @corporation.id, annee: params[:year])
+    @show_mode = true
   end
 
   def new
@@ -15,12 +17,14 @@ class FormulairesController < ApplicationController
     @formulaire = Formulaire.new
     all_data = @corporation.donnees
     @max_year_data = all_data.order(annee: :desc).first if all_data.any?
+    @formulaire.annee = Time.now.year
   end
 
   def create
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
     @formulaire = @adherent.formulaires.build(formulaire_params)
+    @formulaire.annee = Time.now.year
     if @formulaire.save
       redirect_to @corporation, notice: "Formulaire créé avec succès"
     else
@@ -32,6 +36,9 @@ class FormulairesController < ApplicationController
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
     @formulaire = Formulaire.find(params[:id])
+    all_data = @corporation.donnees
+    @max_year_data = all_data.order(annee: :desc).first if all_data.any?
+    @donnees = Donnee.where(corporation_id: @corporation.id, annee: @formulaire.annee)
   end
 
   def update
@@ -40,7 +47,7 @@ class FormulairesController < ApplicationController
     @formulaire = Formulaire.find(params[:id])
 
     if @formulaire.update(formulaire_params)
-      redirect_to @corporation, notice: "Formulaire modifié avec succès"
+      redirect_to root_path, notice: "Formulaire modifié avec succès"
     else
       render :edit
     end
