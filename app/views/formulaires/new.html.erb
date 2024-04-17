@@ -2,6 +2,6 @@
 <% if corporation_id == '1' %>
   <%= render partial: 'formulaires_creation/peintres' %>
 <% else %>
-  <%= "marche pas" %>
+  <% redirect_to root_path %>
 <% end %>
 

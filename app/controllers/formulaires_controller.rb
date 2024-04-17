@@ -39,6 +39,9 @@ class FormulairesController < ApplicationController
     all_data = @corporation.donnees
     @max_year_data = all_data.order(annee: :desc).first if all_data.any?
     @donnees = Donnee.where(corporation_id: @corporation.id, annee: @formulaire.annee)
+    #if @donnees.nil?
+    #  @donnees = Donnee.where("corporation_id = ? AND annee < ?", @corporation.id, @formulaire.annee).order(annee: :desc).first
+    #end
   end
 
   def update
@@ -62,7 +65,5 @@ class FormulairesController < ApplicationController
   def formulaire_params
     params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee)
   end
-
-
 
 end

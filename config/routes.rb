@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post :create_avec_adherent, on: :collection
       resources :formulaires, only: [:show, :new, :create], param: :year
       resources :formulaires, only: [:edit, :update]
+      get 'download_pdf', on: :member
     end
   end
 end

@@ -20,6 +20,27 @@ class AdherentsController < ApplicationController
     end
   end
 
+  def download_pdf
+    @corporation = Corporation.find(params[:corporation_id])
+    @adherent = Adherent.find(params[:adherent_id])
+    year = params[:year]
+    @formulaire = @adherent.formulaires.find_by(annee: year)
+    if @formulaire
+      pdf = generate_pdf_for_adherent(@adherent, year)
+      send_data pdf, filename: "formulaire_#{year}_#{adherent.id}.pdf", type: "application/pdf"
+    else
+      redirect_to corporation_path(@corporation), alert: 'No formulaire found for the selected year.'
+    end
+  end
+
+  def generate_pdf_for_adherent(adherent, year)
+    html = render_to_string(template: "adherents/_pdf", formats: [:html], locals: { adherent: adherent, year: year })
+    grover = Grover.new(html, scale: 0.6)
+    grover.to_pdf
+  end
+
+  private
+
   def adherent_params
     params.require(:adherent).permit(:nom)
   end

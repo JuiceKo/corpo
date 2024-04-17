@@ -40,5 +40,4 @@ class CorporationsController < ApplicationController
     params.require(:corporation).permit(:nom)
   end
 
-
 end
