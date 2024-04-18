@@ -22,7 +22,7 @@ class AdherentsController < ApplicationController
 
   def download_pdf
     @corporation = Corporation.find(params[:corporation_id])
-    @adherent = Adherent.find(params[:id])
+    @adherent = Adherent.find(params[:adherent_id])
     year = params[:year]
     @formulaire = @adherent.formulaires.find_by(annee: year)
     if @formulaire
@@ -32,7 +32,6 @@ class AdherentsController < ApplicationController
       redirect_to corporation_path(@corporation), alert: 'No formulaire found for the selected year.'
     end
   end
-
 
   def generate_pdf_for_adherent(adherent, year)
     html = render_to_string(template: "adherents/_pdf", formats: [:html], locals: { adherent: adherent, year: year })
