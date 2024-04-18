@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "corporation" %>
+
 <div class="container mx-auto px-4">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-bold">Adhérents</h1>
@@ -25,8 +26,9 @@
         <%= form_tag(corporation_adherent_formulaire_path(@corporation, adherent, annee: ""), method: "get", class: "flex flex-wrap") do %>
           <%= select_tag "annee", options_for_select(@adherent_years[adherent.id]), class: "form-select block w-full mt-1 mr-2 mb-4 year-select" %>
           <div class="flex">
-            <%= submit_tag "Voir", class: "voir-link bg-blue-500 text-white font-bold py-2 px-4 rounded voir-link-hover mr-2" %>
-            <%= link_to "Créer un formulaire", new_corporation_adherent_formulaire_path(@corporation, adherent), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+            <%= submit_tag "Voir", name: "voir", class: "voir-link bg-blue-500 text-white font-bold py-2 px-4 rounded voir-link-hover mr-2" %>
+            <%= link_to "Créer un formulaire", new_corporation_adherent_formulaire_path(@corporation, adherent), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded", target: '_blank' %>
+            <%= button_tag 'Télécharger PDF', name: "telecharger", type: 'submit', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded' %>
           </div>
         <% end %>
       </div>

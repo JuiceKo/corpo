@@ -1,16 +1,17 @@
+/* document.getElementById('download-button').addEventListener('click', function(e) {
+    e.preventDefault();
+    var form = document.getElementById('form-id');
+    form.action = "<%= download_corporation_adherent_formulaire_path(@corporation, adherent, annee: "") %>";
+    form.submit();
+}); */
+
 document.addEventListener('DOMContentLoaded', function() {
-    const voirLinks = document.querySelectorAll('.voir-link');
+    const selectAnnee = document.querySelector('#annee');
+    const linkDownloadPDF = document.querySelector('#link-download-pdf');
 
-    voirLinks.forEach(voirLink => {
-        voirLink.addEventListener('click', function(event) {
-            const adherentId = this.dataset.adherentId;
-            const selectedYear = document.querySelector(`#form-year-${adherentId}`).value;
-            const corporationId = this.dataset.corporationId;
-
-            const url = `/corporations/${corporationId}/adherents/${adherentId}/formulaires/${selectedYear}`;
-            window.location.href = url;
-        });
+    selectAnnee.addEventListener('change', function() {
+        const selectedAnnee = selectAnnee.value;
+        const href = linkDownloadPDF.getAttribute('data-original-href');
+        linkDownloadPDF.setAttribute('href', href + '?annee=' + selectedAnnee);
     });
 });
-;
-

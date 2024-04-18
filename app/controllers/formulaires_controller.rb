@@ -6,10 +6,20 @@ class FormulairesController < ApplicationController
     @adherent = Adherent.find(params[:adherent_id])
     @annee = params[:annee]
     @formulaire = @adherent.formulaires.find_by(annee: @annee)
-    all_data = @corporation.donnees
-    @max_year_data = all_data.order(annee: :desc).first if all_data.any?
-    @donnees = Donnee.where(corporation_id: @corporation.id, annee: @annee)
+    @donnees = Donnee.where(corporation_id: @corporation.id).where("annee <= ?", @annee).order(annee: :desc).first
     @show_mode = true
+    if params[:telecharger]
+      html = render_to_string(template: "formulaires/show", formats: [:html])
+      grover = Grover.new(html,
+                          scale: 0.40,
+                          encoding: 'utf8',
+                          style_tag_options: [{ path: "app/assets/stylesheets/corporation.css" }],
+                          puppeteer: {
+                            args: ["--no-sandbox"]
+                          })
+      pdf = grover.to_pdf
+      send_data pdf, filename: "formulaire_#{@annee}.pdf", type: 'application/pdf', disposition: 'inline'
+    end
   end
 
   def new
@@ -37,9 +47,8 @@ class FormulairesController < ApplicationController
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
     @formulaire = Formulaire.find(params[:id])
-    all_data = @corporation.donnees
-    @max_year_data = all_data.order(annee: :desc).first if all_data.any?
-    @donnees = Donnee.where(corporation_id: @corporation.id, annee: @formulaire.annee)
+    @annee = @formulaire.annee
+    @donnees = Donnee.where(corporation_id: @corporation.id).where("annee <= ?", @annee).order(annee: :desc).first
     #if @donnees.nil?
     #  @donnees = Donnee.where("corporation_id = ? AND annee < ?", @corporation.id, @formulaire.annee).order(annee: :desc).first
     #end
@@ -57,18 +66,7 @@ class FormulairesController < ApplicationController
     end
   end
 
-  def download_pdf
-    @adherent = Adherent.find(params[:adherent_id])
-    @formulaire = @adherent.formulaires.find_by(year: params[:year])
-    if @formulaire
-    html_content = render_to_string(template: "formulaires/pdf_template.html.erb", layout: "pdf_layout.html.erb", locals: { formulaire: @formulaire })
-    pdf = Grover.new(html_content,scale: 0.6).to_pdf
-    send_data pdf, filename: "formulaire.pdf", type: "application/pdf", disposition: "inline"
-    else
-      redirect_to root_path
-    end
 
-  end
 
   def set_formulaire
     @formulaire = Formulaire.find(params[:id])

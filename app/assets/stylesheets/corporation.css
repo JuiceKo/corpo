@@ -80,6 +80,7 @@ input[type="checkbox"]:hover {
 
 .img-img-droite {
     margin-left: auto;
+    float: right;
 }
 
 .img-gauche img, .img-droite img {
@@ -112,11 +113,11 @@ input[type="checkbox"]:hover {
 }
 
 .l > .sixp {
-    flex: 70%;
+    flex: 65%;
 }
 
 .l > .quatrep {
-    flex: 30%;
+    flex: 35%;
 }
 
 .sixp {

@@ -3,8 +3,8 @@ class AdherentsController < ApplicationController
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.new(corporation: @corporation)
     @formulaire = @adherent.formulaires.build
-    all_data = @corporation.donnees
-    @max_year_data = all_data.order(annee: :desc).first if all_data.any?
+    @annee = trouver_annee
+    @donnees = Donnee.find_by(annee: @annee)
   end
 
   def create_avec_adherent
@@ -12,6 +12,7 @@ class AdherentsController < ApplicationController
     @formulaire = Formulaire.new(formulaire_params)
     @adherent = Adherent.new(nom: @formulaire.nom_prenom, corporation: @corporation)
     @formulaire.adherent = @adherent
+    @formulaire.annee = Time.now.year
 
     if @adherent.save && @formulaire.save
       redirect_to corporation_path(@corporation), notice: 'Adherent and Formulaire were successfully created.'
@@ -20,25 +21,13 @@ class AdherentsController < ApplicationController
     end
   end
 
-  def download_pdf
-    @corporation = Corporation.find(params[:corporation_id])
-    @adherent = Adherent.find(params[:id])
-    year = params[:year]
-    @formulaire = @adherent.formulaires.find_by(annee: year)
-    if @formulaire
-      pdf = generate_pdf_for_adherent(@adherent, year)
-      send_data pdf, filename: "formulaire_#{year}_#{adherent.id}.pdf", type: "application/pdf"
-    else
-      redirect_to corporation_path(@corporation), alert: 'No formulaire found for the selected year.'
-    end
+  def trouver_annee
+    current_year = Time.now.year
+    year = Donnee.where(corporation_id: @corporation.id, annee: current_year).exists? ? current_year : Donnee.where(corporation_id: @corporation.id).where("annee < ?", current_year).order(annee: :desc).pluck(:annee).first
+    year
   end
 
 
-  def generate_pdf_for_adherent(adherent, year)
-    html = render_to_string(template: "adherents/_pdf", formats: [:html], locals: { adherent: adherent, year: year })
-    grover = Grover.new(html, scale: 0.6)
-    grover.to_pdf
-  end
 
   private
 
