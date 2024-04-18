@@ -19,14 +19,16 @@
   <% @adherents.each do |adherent| %>
     <script src="<%= asset_path('index_corporations.js') %>"></script>
     <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-      <div class="mb-6 border-b border-gray-300 pb-6">
+      <div class="mb-4 border-b border-gray-300 pb-6">
         <h2 class="text-xl font-semibold mb-2"><%= adherent.nom %></h2>
         <p class="text-gray-600 mb-2"><%= adherent.numero_adherent %></p>
-
-        <%= select_tag "form-year-#{adherent.id}", options_for_select(@adherent_years[adherent.id]), class: "form-select block w-full mt-1 mb-4 year-select", data: { "corporation-id" => @corporation.id, "adherent-id" => adherent.id } %>
-        <span class="voir-link bg-blue-500 text-white font-bold py-2 px-4 mt-6 rounded voir-link-hover" data-adherent-id="<%= adherent.id %>" data-corporation-id="<%= @corporation.id %>">Voir</span>
-        <%= link_to "Créer un formulaire", new_corporation_adherent_formulaire_path(@corporation, adherent), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 rounded" %>
-        <%= link_to "Télécharger PDF", download_pdf_corporation_adherent_path(@corporation, adherent), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 rounded" %>
+        <%= form_tag(corporation_adherent_formulaire_path(@corporation, adherent, annee: ""), method: "get", class: "flex flex-wrap") do %>
+          <%= select_tag "annee", options_for_select(@adherent_years[adherent.id]), class: "form-select block w-full mt-1 mr-2 mb-4 year-select" %>
+          <div class="flex">
+            <%= submit_tag "Voir", class: "voir-link bg-blue-500 text-white font-bold py-2 px-4 rounded voir-link-hover mr-2" %>
+            <%= link_to "Créer un formulaire", new_corporation_adherent_formulaire_path(@corporation, adherent), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
