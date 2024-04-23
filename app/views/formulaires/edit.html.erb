@@ -1,6 +1,6 @@
 <div class="flex flex-col">
   <div class="flex justify-between items-center">
-    <%= link_to "Retour", corporation_path(@corporation), class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4" %>
+    <%= link_to "Retour", request.referer, class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4", data: { turbo: false } %>
   </div>
     <% corporation_id = params[:corporation_id] %>
     <% if corporation_id == '1' %>

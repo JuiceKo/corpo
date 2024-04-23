@@ -1,7 +1,7 @@
 <div class="container mx-auto px-4">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-bold">Modifier le nom de la corporation</h1>
-    <%= link_to "Retour", root_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    <%= link_to "Retour", request.referer, class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4" %>
   </div>
 
   <%= form_with(:model => @corporation, :data   => { turbo: true, turbo_confirm: "Are you Sure?" } ,local: true) do |form| %>
