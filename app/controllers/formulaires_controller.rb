@@ -3,6 +3,7 @@ class FormulairesController < ApplicationController
   #before_action :set_formulaire, only: [:edit, :update]
   def show
     @corporation = Corporation.find(params[:corporation_id])
+    @selected_year = session[:selected_year]
     @adherent = Adherent.find(params[:adherent_id])
     @annee = params[:annee]
     @formulaire = @adherent.formulaires.find_by(annee: @annee)

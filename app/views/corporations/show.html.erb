@@ -1,15 +1,25 @@
 <%= stylesheet_link_tag "index" %>
+<%= javascript_include_tag "show_corporations", type: :module %>
 
 <div class="container mx-auto px-4">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-bold">Adhérents</h1>
     <a href="<%= root_path %>" class="button-primary">Retour à l'accueil</a>
+    <p>Selected Year: <%= @selected_year %></p>
   </div>
+
+  <%= form_tag(corporation_path(@corporation), method: :get, class: "mb-4", id: "filter-form") do %>
+    <%= check_box_tag "show_all_adherents", 1, params[:show_all_adherents], id: "show_all_adherents" %>
+    <%= label_tag "show_all_adherents", "Afficher tous les adhérents" %>
+    <%= hidden_field_tag :selected_year, @selected_year %>
+    <%= submit_tag "Filtrer", class: "button-primary ml-2", style: "display: none;" %>
+  <% end %>
 
   <div class="flex mb-4">
     <%= search_form_for @q, url: corporation_path(@corporation), html: { class: "search-form flex-1" } do |f| %>
       <div class="flex">
         <%= f.search_field :nom_or_numero_adherent_cont, placeholder: "Rechercher par nom ou numéro adhérent", class: "w-full px-4 py-2  rounded border border-gray-300"%>
+        <%= hidden_field_tag :selected_year, @selected_year %>
         <%= f.submit "Rechercher", class: "button-primary ml-2" %>
       </div>
     <% end %>
@@ -36,4 +46,5 @@
       </div>
     </div>
   <% end %>
+
 </div>

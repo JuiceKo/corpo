@@ -1,23 +1,49 @@
 <%= stylesheet_link_tag "corporation" %>
+<%= javascript_include_tag "index_corporations", type: :module %>
+
 <div class="container mx-auto px-4">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Corporations</h1>
 
-
-  <h1 class="text-3xl font-bold mb-6">Corporations</h1>
-
-  <% @corporations.each do |corpo| %>
-    <div class="border border-gray-200 rounded-lg mb-6">
-      <% latest_donnee = @latest_donnees[corpo.id] %>
-      <% if latest_donnee %>
-        <h2 class="text-xl font-semibold bg-gray-100 px-4 py-2 rounded-t-lg"><%= latest_donnee.nom_formulaire.upcase %></h2>
-      <% end %>
-
-      <div class="p-6">
-        <p class="text-gray-600 mb-2">Nombre d'adhérents : <%= corpo.adherents.count %></p>
-        <div class="flex justify-between items-center">
-          <%= link_to "Modifier le nom", edit_corporation_path(corpo), class: "text-gray-700 hover:text-gray-900" %>
-          <%= link_to "Voir les adhérents", corporation_path(corpo), data: { turbo: false }, class: "text-blue-500 font-semibold hover:underline" %>
-        </div>
-      </div>
+    <div class="flex items-center">
+      <p class="mr-4">Exercice en cours:</p>
+      <%= select_tag :selected_year, options_for_select(Annee.all.map(&:annee), selected: Time.now.year), onchange: "updateShowButton(this)", class: "border border-gray-300 rounded-lg px-3 py-2 pr-8 focus:outline-none" %>
     </div>
-  <% end %>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom Corporation</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <div class="mx-auto" style="width: max-content;">
+            Nombre d'adhérents
+          </div>
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+      <% @corporations.each do |corpo| %>
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">
+              <% latest_donnee = @latest_donnees[corpo.id] %>
+              <% if latest_donnee %>
+                <b><%= latest_donnee.nom_formulaire.upcase %></b>
+              <% end %>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-center">
+            <div class="text-sm text-gray-900"><%= corpo.adherents.count %></div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <%= link_to "Voir les adhérents", corporation_path(corpo, selected_year: Time.now.year), data: { turbo: false }, class: "show-button text-blue-500 font-semibold hover:underline" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
