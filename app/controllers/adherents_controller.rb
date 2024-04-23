@@ -12,7 +12,7 @@ class AdherentsController < ApplicationController
     @formulaire = Formulaire.new(formulaire_params)
     @adherent = Adherent.new(nom: @formulaire.nom_prenom, corporation: @corporation)
     @formulaire.adherent = @adherent
-    @formulaire.annee = Time.now.year
+    @formulaire.annee = session[:selected_year]
 
     if @adherent.save && @formulaire.save
       redirect_to corporation_path(@corporation), notice: 'Adherent and Formulaire were successfully created.'

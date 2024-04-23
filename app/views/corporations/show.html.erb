@@ -41,17 +41,21 @@
     <tbody>
     <% @adherents.each do |adherent| %>
       <tr class="bg-white">
-        <td class="px-6 py-4 whitespace-nowrap w-2/5"><%= adherent.nom %></td>
+        <td class="px-6 py-4 whitespace-nowrap w-2/5"><%= adherent.nom.capitalize %></td>
         <td class="px-6 py-4 whitespace-nowrap w-1/5">
           <%= form_tag(corporation_adherent_formulaire_path(@corporation, adherent, annee: ""), method: "get", class: "flex flex-wrap justify-between") do %>
-            <div class="mb-2">
-              <%= select_tag "annee", options_for_select(@adherent_years[adherent.id]) %>
+            <div>
+              <%= select_tag "annee", options_for_select(@adherent_years[adherent.id]), class: "form-select rounded-md" %>
             </div>
         </td>
         <td class="px-6 py-4 whitespace-nowrap w-2/5">
             <div class="flex">
               <%= submit_tag "Voir", name: "voir", class: "button-primary mr-2" %>
-              <%= link_to "Créer un formulaire", new_corporation_adherent_formulaire_path(@corporation, adherent), class: "button-primary mr-2" %>
+              <% if @adherent_years[adherent.id].include?(params[:selected_year]) %>
+                <%= link_to "Créer un formulaire", "#", class: "button-disabled mr-2", data: { disable_with: "Processing..." } %>
+              <% else %>
+                <%= link_to "Créer un formulaire", new_corporation_adherent_formulaire_path(@corporation, adherent), class: "button-primary mr-2" %>
+              <% end %>
               <%= button_tag 'Télécharger PDF', name: "telecharger", type: 'submit', class: 'button-primary', target: '_blank'  %>
             </div>
           <% end %>

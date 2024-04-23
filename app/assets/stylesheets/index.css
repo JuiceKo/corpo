@@ -7,6 +7,20 @@
     transition: background-color 0.3s ease;
 }
 
+.button-disabled {
+    background-color: #727272;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.button-disabled:hover {
+    cursor: default;
+}
+
+
 .button-primary:hover {
     background-color: #357ae8;
     cursor: pointer;
@@ -29,3 +43,4 @@
     background: rgb(246,246,246);
     background: linear-gradient(90deg, rgba(246,246,246,1) 0%, rgba(182,210,244,1) 50%, rgba(255,255,255,1) 100%);
 }
+

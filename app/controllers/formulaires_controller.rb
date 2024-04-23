@@ -26,10 +26,11 @@ class FormulairesController < ApplicationController
   def new
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
+    @selected_year = params[:selected_year]
     @formulaire = Formulaire.new
     all_data = @corporation.donnees
     @max_year_data = all_data.order(annee: :desc).first if all_data.any?
-    @formulaire.annee = Time.now.year
+    @formulaire.annee = session[:selected_year]
   end
 
   def create
