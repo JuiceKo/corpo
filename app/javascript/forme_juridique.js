@@ -1,18 +1,14 @@
-import $ from 'jquery';
+document.addEventListener('DOMContentLoaded', (event) => {
+    const radios = document.querySelectorAll('input[type=radio][name="formulaire[forme_juridique]"]');
+    const textField = document.getElementById('autre_option-text');
 
-$(document).ready(function() {
-    $('#autre-option').change(function() {
-        if ($(this).is(':checked')) {
-            $('.text-field').prop('disabled', false);
-        } else {
-            $('.text-field').prop('disabled', true);
-        }
-    });
-
-    $('form').submit(function() {
-        if ($('#autre-option').is(':checked')) {
-            var autreValeur = $('.text-field').val();
-            $('input[name="coiffeur[forme_juridique]"]').val(autreValeur);
-        }
+    radios.forEach((radio) => {
+        radio.addEventListener('change', function() {
+            if (this.value == 'Autre') {
+                textField.disabled = false;
+            } else {
+                textField.disabled = true;
+            }
+        });
     });
 });

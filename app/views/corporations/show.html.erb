@@ -1,38 +1,39 @@
-<%= stylesheet_link_tag "corporation" %>
+<%= stylesheet_link_tag "index" %>
 
 <div class="container mx-auto px-4">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-bold">Adhérents</h1>
-    <a href="<%= root_path %>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Retour à l'accueil</a>
+    <a href="<%= root_path %>" class="button-primary">Retour à l'accueil</a>
   </div>
 
-  <div class="flex">
-    <%= link_to "Créer un formulaire avec un nouvel adhérent", new_avec_adherent_corporation_adherents_path(@corporation), data: { turbo: false }, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-2" %>
+  <div class="flex mb-4">
+    <%= search_form_for @q, url: corporation_path(@corporation), html: { class: "search-form flex-1" } do |f| %>
+      <div class="flex">
+        <%= f.search_field :nom_or_numero_adherent_cont, placeholder: "Rechercher par nom ou numéro adhérent", class: "w-full px-4 py-2  rounded border border-gray-300"%>
+        <%= f.submit "Rechercher", class: "button-primary ml-2" %>
+      </div>
+    <% end %>
+    <%= link_to "Créer un formulaire avec un nouvel adhérent", new_avec_adherent_corporation_adherents_path(@corporation), data: { turbo: false }, class: "button-primary ml-2" %>
   </div>
-
-  <%= search_form_for @q, url: corporation_path(@corporation), html: { class: "search-form mb-6" } do |f| %>
-    <div class="flex">
-      <%= f.search_field :nom_or_numero_adherent_cont, placeholder: "Rechercher par nom ou numéro adhérent", class: "search-field w-full px-4 py-2 rounded border border-gray-300", id: "search-bar-id" %>
-      <%= f.submit "Rechercher", class: "search-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2" %>
-    </div>
-  <% end %>
 
   <% @adherents.each do |adherent| %>
     <script src="<%= asset_path('index_corporations.js') %>"></script>
-    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <div class="bg-white shadow-xl shadow-blue-300/30 rounded-lg p-6 mb-6 border-2 border border-gray-200 border-opacity-50">
       <div class="mb-4 border-b border-gray-300 pb-6">
-        <h2 class="text-xl font-semibold mb-2"><%= adherent.nom %></h2>
+        <div class="flex justify-between items-center mb-2">
+          <h2 class="text-xl font-semibold"><%= adherent.nom %></h2>
+          <%= link_to "Modifier le nom", edit_corporation_adherent_path(@corporation, adherent), class: "button-secondary" %>
+        </div>
         <p class="text-gray-600 mb-2"><%= adherent.numero_adherent %></p>
-        <%= form_tag(corporation_adherent_formulaire_path(@corporation, adherent, annee: ""), method: "get", class: "flex flex-wrap") do %>
-          <%= select_tag "annee", options_for_select(@adherent_years[adherent.id]), class: "form-select block w-full mt-1 mr-2 mb-4 year-select" %>
+        <%= form_tag(corporation_adherent_formulaire_path(@corporation, adherent, annee: ""), method: "get", class: "flex flex-wrap justify-between") do %>
+          <%= select_tag "annee", options_for_select(@adherent_years[adherent.id]), class: "form-select mb-2" %>
           <div class="flex">
-            <%= submit_tag "Voir", name: "voir", class: "voir-link bg-blue-500 text-white font-bold py-2 px-4 rounded voir-link-hover mr-2" %>
-            <%= link_to "Créer un formulaire", new_corporation_adherent_formulaire_path(@corporation, adherent), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded", target: '_blank' %>
-            <%= button_tag 'Télécharger PDF', name: "telecharger", type: 'submit', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded' %>
+            <%= submit_tag "Voir", name: "voir", class: "button-primary mr-2" %>
+            <%= link_to "Créer un formulaire", new_corporation_adherent_formulaire_path(@corporation, adherent), class: "button-primary mr-2" %>
+            <%= button_tag 'Télécharger PDF', name: "telecharger", type: 'submit', class: 'button-primary', target: '_blank'  %>
           </div>
         <% end %>
       </div>
     </div>
   <% end %>
 </div>
-

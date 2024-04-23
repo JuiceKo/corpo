@@ -10,14 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_084546) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_132149) do
   create_table "adherents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "nom"
-    t.integer "numero_adherent"
+    t.string "numero_adherent"
     t.bigint "corporation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["corporation_id"], name: "index_adherents_on_corporation_id"
+  end
+
+  create_table "annees", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "annee"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "corporations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -64,6 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_084546) do
   end
 
   create_table "formulaires", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "adherent_id", null: false
     t.string "raison_sociale"
     t.string "nom_prenom"
     t.string "adresse"
@@ -86,7 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_084546) do
     t.string "iban_sepa"
     t.string "bic_sepa"
     t.string "lieu_date_sepa"
-    t.string "checkbox_1"
+    t.boolean "checkbox_1"
     t.string "checkbox_2"
     t.string "checkbox_3"
     t.string "checkbox_4"
@@ -105,16 +112,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_084546) do
     t.string "champ_8"
     t.string "champ_9"
     t.string "annee"
-    t.bigint "corporation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "adherent_id", null: false
     t.index ["adherent_id"], name: "index_formulaires_on_adherent_id"
-    t.index ["corporation_id"], name: "index_formulaires_on_corporation_id"
   end
 
   add_foreign_key "adherents", "corporations"
   add_foreign_key "donnees", "corporations"
   add_foreign_key "formulaires", "adherents"
-  add_foreign_key "formulaires", "corporations"
 end

@@ -4,7 +4,7 @@ class AdherentsController < ApplicationController
     @adherent = Adherent.new(corporation: @corporation)
     @formulaire = @adherent.formulaires.build
     @annee = trouver_annee
-    @donnees = Donnee.find_by(annee: @annee)
+    @donnees = Donnee.where(corporation_id: @corporation.id, annee: @annee)
   end
 
   def create_avec_adherent
@@ -21,13 +21,31 @@ class AdherentsController < ApplicationController
     end
   end
 
-  def trouver_annee
-    current_year = Time.now.year
-    year = Donnee.where(corporation_id: @corporation.id, annee: current_year).exists? ? current_year : Donnee.where(corporation_id: @corporation.id).where("annee < ?", current_year).order(annee: :desc).pluck(:annee).first
-    year
+  def edit
+    @corporation = Corporation.find(params[:corporation_id])
+    @adherent = Adherent.find(params[:id])
   end
 
+  def update
+    @corporation = Corporation.find(params[:corporation_id])
+    @adherent = Adherent.find(params[:id])
 
+    if @adherent.update(adherent_params)
+      redirect_to corporation_path(@corporation), notice: 'Les informations de l\'adhérent ont été mises à jour avec succès.'
+    else
+      render :edit
+    end
+  end
+
+  def trouver_annee
+    current_year = Time.now.year
+    donnee = Donnee.find_by(corporation_id: @corporation.id, annee: current_year)
+    if donnee
+      return donnee.annee
+    else
+      return Donnee.where(corporation_id: @corporation.id).where("annee < ?", current_year).order(annee: :desc).pluck(:annee).first
+    end
+  end
 
   private
 
@@ -36,7 +54,7 @@ class AdherentsController < ApplicationController
   end
 
   def formulaire_params
-    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee)
+    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee, :checkbox_1, :code_naf_ape)
   end
 
 end

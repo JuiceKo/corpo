@@ -1,7 +1,16 @@
-<% corporation_id = params[:corporation_id] %>
-<% if corporation_id == '1' %>
-  <%= render partial: 'formulaires_creation/peintres' %>
-<% else %>
-  <% redirect_to root_path %>
-<% end %>
+<div class="flex flex-col">
+  <div class="flex justify-between items-center">
+    <%= link_to "Retour", corporation_path(@corporation), class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4 self-start" %>
+  </div>
 
+
+  <% corporation_id = params[:corporation_id] %>
+    <% if corporation_id == '1' %>
+      <%= render partial: 'formulaires_creation/peintres' %>
+    <% elsif corporation_id == '2'%>
+      <%= render partial: 'formulaires_creation/boulangers' %>
+    <% else %>
+      <% redirect_to root_path %>
+  <% end %>
+
+</div>

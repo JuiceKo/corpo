@@ -1,0 +1,2 @@
+class Annee < ApplicationRecord
+end

@@ -468,3 +468,8 @@ form {
 .copama {
     color: #e95e2c ;
 }
+
+#year_selector {
+    height: 100px; /* Adjust this value to your preference */
+    overflow-y: auto;
+}

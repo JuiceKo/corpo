@@ -66,7 +66,17 @@ class FormulairesController < ApplicationController
     end
   end
 
+  def destroy
+    @corporation = Corporation.find(params[:corporation_id])
+    @adherent = Adherent.find(params[:adherent_id])
+    @formulaire = Formulaire.find(params[:id])
 
+    if @formulaire.destroy
+      redirect_to corporation_adherent_formulaire_path(@corporation, @adherent), notice: 'Le formulaire a été supprimé avec succès.'
+    else
+      redirect_to corporation_adherent_formulaire_path(@corporation, @adherent), alert: 'Une erreur est survenue lors de la suppression du formulaire.'
+    end
+  end
 
   def set_formulaire
     @formulaire = Formulaire.find(params[:id])
@@ -75,7 +85,8 @@ class FormulairesController < ApplicationController
   private
 
   def formulaire_params
-    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee)
+    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee, :checkbox_1, :code_naf_ape,  :checkbox_2,  :checkbox_3, :checkbox_4, :checkbox_5)
   end
 
 end
+

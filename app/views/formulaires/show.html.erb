@@ -1,10 +1,17 @@
-<%= link_to "Modifier", edit_corporation_adherent_formulaire_path(@corporation, @adherent, @formulaire), class: "search-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2" %>
-<%= stylesheet_link_tag "corporation.css" %>
-<meta name="viewport" content="width=device-width,initial-scale=1" charset = "utf-8">
-<% corporation_id = params[:corporation_id] %>
-<% if corporation_id == '1' %>
-  <%= render partial: 'formulaires_edition_show/peintres' %>
-<% else %>
-  <%= "marche pas" %>
-<% end %>
+<div class="flex flex-col">
+  <div class="flex justify-between items-center">
+    <%= link_to "Modifier", edit_corporation_adherent_formulaire_path(@corporation, @adherent, @formulaire), class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4 place-self-start" %>
+    <%= link_to "Retour", corporation_path(@corporation), class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4" %>
+  </div>
+  <%= stylesheet_link_tag "corporation.css" %>
+  <meta name="viewport" content="width=device-width,initial-scale=1" charset = "utf-8">
+  <% corporation_id = params[:corporation_id] %>
+  <% if corporation_id == '1' %>
+    <%= render partial: 'formulaires_edition_show/peintres' %>
+  <% elsif corporation_id == '2'%>
+    <%= render partial: 'formulaires_edition_show/boulangers' %>
+  <% else %>
+    <%= "marche pas" %>
+  <% end %>
+</div>
 
