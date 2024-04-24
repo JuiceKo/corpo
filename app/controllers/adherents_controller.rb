@@ -13,9 +13,8 @@ class AdherentsController < ApplicationController
     @adherent = Adherent.new(nom: @formulaire.nom_prenom, corporation: @corporation)
     @formulaire.adherent = @adherent
     @formulaire.annee = session[:selected_year]
-
     if @adherent.save && @formulaire.save
-      redirect_to corporation_path(@corporation), notice: 'Adherent and Formulaire were successfully created.'
+      redirect_to corporation_path(@corporation, selected_year: session[:selected_year]), notice: 'Adherent and Formulaire were successfully created.'
     else
       render :new_avec_adherent
     end
@@ -54,7 +53,7 @@ class AdherentsController < ApplicationController
   end
 
   def formulaire_params
-    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee, :checkbox_1, :code_naf_ape)
+    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee, :checkbox_1, :code_naf_ape, :checkbox_2,  :checkbox_3, :checkbox_4, :checkbox_5, :champ_1, :champ_2, :champ3)
   end
 
 end

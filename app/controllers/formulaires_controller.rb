@@ -26,11 +26,12 @@ class FormulairesController < ApplicationController
   def new
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
-    @selected_year = params[:selected_year]
-    @formulaire = Formulaire.new
+    @selected_year = session[:selected_year]
     all_data = @corporation.donnees
-    @max_year_data = all_data.order(annee: :desc).first if all_data.any?
-    @formulaire.annee = session[:selected_year]
+    @max_year_data = all_data.find_by(annee: @selected_year) || all_data.where('annee < ?', @selected_year).order(annee: :desc).first
+    @formulaire = Formulaire.new
+    @formulaire.annee = @selected_year
+
   end
 
   def create
@@ -60,9 +61,9 @@ class FormulairesController < ApplicationController
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = @corporation.adherents.find(params[:adherent_id])
     @formulaire = Formulaire.find(params[:id])
-
+    @selected_year = session[:selected_year]
     if @formulaire.update(formulaire_params)
-      redirect_to root_path, notice: "Formulaire modifié avec succès"
+      redirect_to corporation_path(@corporation, selected_year: session[:selected_year]), notice: "Formulaire modifié avec succès"
     else
       render :edit
     end
@@ -87,7 +88,7 @@ class FormulairesController < ApplicationController
   private
 
   def formulaire_params
-    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee, :checkbox_1, :code_naf_ape,  :checkbox_2,  :checkbox_3, :checkbox_4, :checkbox_5)
+    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee, :checkbox_1, :code_naf_ape,  :checkbox_2,  :checkbox_3, :checkbox_4, :checkbox_5, :champ_1, :champ_2, :champ3)
   end
 
 end
