@@ -70,4 +70,5 @@ gem 'mysql2', '~> 0.5.2'
 gem "ransack", "~> 4.1"
 gem "tailwindcss-rails", "~> 2.4"
 gem 'grover', '~> 1.1.7'
+gem 'devise', '~> 4.9'
 

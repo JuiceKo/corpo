@@ -1,5 +1,5 @@
 <div class="flex flex-col">
-  <%= link_to "Retour", corporation_path(@corporation),data: { turbo: false }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded" %>
+  <%= link_to "Retour", corporation_path(@corporation, selected_year: session[:selected_year]), data: { turbo: false }, class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4" %>
 
   <% corporation_id = params[:corporation_id] %>
   <% if corporation_id == '1' %>
@@ -11,3 +11,6 @@
   <% end %>
 
 </div>
+
+
+
