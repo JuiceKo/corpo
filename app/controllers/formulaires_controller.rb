@@ -28,7 +28,7 @@ class FormulairesController < ApplicationController
     @adherent = Adherent.find(params[:adherent_id])
     @selected_year = session[:selected_year]
     all_data = @corporation.donnees
-    @max_year_data = all_data.find_by(annee: @selected_year) || all_data.where('annee < ?', @selected_year).order(annee: :desc).first
+    @donnees = all_data.find_by(annee: @selected_year) || all_data.where('annee < ?', @selected_year).order(annee: :desc).first
     @formulaire = Formulaire.new
     @formulaire.annee = @selected_year
 
@@ -38,7 +38,7 @@ class FormulairesController < ApplicationController
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
     @formulaire = @adherent.formulaires.build(formulaire_params)
-    @formulaire.annee = Time.now.year
+    @formulaire.annee = @selected_year
     if @formulaire.save
       redirect_to @corporation, notice: "Formulaire créé avec succès"
     else

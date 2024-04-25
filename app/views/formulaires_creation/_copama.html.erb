@@ -4,7 +4,7 @@
   <%= stylesheet_link_tag "corporation" %>
 
 
-  <%= form_with(model: [@corporation, @adherent, @formulaire], url: corporation_adherent_formulaire_path(@corporation, @adherent, @formulaire), method: :patch) do |form| %>
+  <%= form_with(model: [@corporation, @adherent, @formulaire], url: corporation_adherent_formulaires_path(@corporation, @adherent), local: true) do |form| %>
     <div class="haut">
       <div class="images">
         <div class="img-gauche" >

@@ -141,20 +141,26 @@
 
         <div class="part part4">
           <h2> Votre cotisation </h2>
+          <p> Cotisation de base (part corporation <%= donnees.montant_parametre_1 %> + part CAPEB <%= donnees.montant_parametre_2 %> + abonnement bâtiment artisanal <%= donnees.montant_parametre_3 %>) </p>
+          <br>
+          <%= form.label :cotisation, "Part variable, entreprise non bâtiment " %>
+          <%= form.number_field :champ_1, readonly: @show_mode, disabled: @show_mode %>
+          <p> Salarié(e)s x <%= donnees.montant_parametre_4 %> €</p>
+          <%= form.text_field :champ_2, readonly: true, id: 'Multiply-amount-field-ebe' %>
 
-          <div class="field">
-            <div class="sixp">
-              <b> Cotisation de base : </b>
-            </div>
-            <div class="quatrep">
-              <b> <%= donnees.montant_parametre_1 %> </b>
-            </div>
-            <%= form.hidden_field :champ_1, value: donnees.montant_parametre_1 %>
-          </div>
-          <div class="petit2">
-            <p> La part variable de la cotisation <b>(0,70 % des rémunérations brutes déclarées) </b> est perçue par la Caisse de Congés Payés</p>
-          </div>
+          <%= form.label :cotisation, "Part variable, entreprise non bâtiment " %>
+          <%= form.number_field :champ_3 , readonly: @show_mode, disabled: @show_mode %>
+          <p> Salarié(e)s x <%= donnees.montant_parametre_5 %> </p>
+          <%= form.text_field  :champ_4, readonly: true, id: 'Multiply-amount-field-ebe-2' %>
+
+          <b><%= label_tag 'total_amount', 'Total à payer :' %> </b>
+          <%= text_field_tag 'adherent[cotisation]', '', readonly: true, id: 'total-amount-field' %>
+
+          <p> La part variable de la cotisation (0,70% de la masse salariale, dont 0,20% reversé à la CAPEB) est perçue par la Caisse de Congés Payés</p>
+
         </div>
+
+
 
         <!---------------------------------- PART 5 --------------------------------------------->
 
