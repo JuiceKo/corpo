@@ -99,17 +99,16 @@
 
     <div class="part3">
       <h2 class="copama"> Votre entreprise</h2>
-      <div class="form-options">
+      <div class="form-options" data-controller="forme-juridique">
         <%= form.label :forme_juridique, "Forme juridique :" %>
-        <%= form.radio_button :forme_juridique, 'Ent. ind.', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> Ent. ind.<br>
-        <%= form.radio_button :forme_juridique, 'EIRL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> EIRL<br>
-        <%= form.radio_button :forme_juridique, 'EURL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> EURL<br>
-        <%= form.radio_button :forme_juridique, 'SARL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SARL<br>
-        <%= form.radio_button :forme_juridique, 'SAS', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SAS<br>
-        <%= form.radio_button :forme_juridique, 'SASU', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SASU<br>
-        <%= form.radio_button :forme_juridique, 'Autre', class: 'form-check-input', id: 'autre-option', readonly: @show_mode, disabled: @show_mode %> Autre :
-        <%= form.text_field :forme_juridique, { class: 'text-field custom-text-field autre_option-text', id:'autre_option-text', disabled: true }%>
-
+        <%= form.radio_button :forme_juridique, 'Ent. ind.', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> Ent. ind.<br>
+        <%= form.radio_button :forme_juridique, 'EIRL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> EIRL<br>
+        <%= form.radio_button :forme_juridique, 'EURL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> EURL<br>
+        <%= form.radio_button :forme_juridique, 'SARL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> SARL<br>
+        <%= form.radio_button :forme_juridique, 'SAS', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> SAS<br>
+        <%= form.radio_button :forme_juridique, 'SASU', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> SASU<br>
+        <%= form.radio_button :forme_juridique, 'Autre', class: 'form-check-input', id: 'autre-option', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'autre' } %> Autre :
+        <%= form.text_field :forme_juridique, { class: 'text-field custom-text-field autre_option-text', id:'autre_option-text', disabled: true, data: { 'forme-juridique-target': 'textField' } }%>
       </div>
 
 

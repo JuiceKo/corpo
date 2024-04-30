@@ -1,6 +1,5 @@
 <div class="AIO">
   <%= javascript_include_tag "forme_juridique", type: :module %>
-  <%= javascript_include_tag "cotisation", type: :module %>
   <%= stylesheet_link_tag "corporation" %>
 
 
@@ -156,11 +155,11 @@
         </div>
 
 
-        <div class="quatrep column">
+        <div class="quatrep column" data-controller="cotisation">
           <div class="field">
-            <%= form.radio_button :champ_1, @donnees.montant_parametre_1, disabled: @show_mode, class: "radio-button" %>
-            <div><%= @donnees.texte_parametre_1 %>
-            </div> <%= @donnees.montant_parametre_1 %><br>
+            <%= form.radio_button :champ_1, @donnees.montant_parametre_1, disabled: @show_mode, class: "radio-button", data: { total_amount_target: "radioButton" } %>
+            <div><%= @donnees.texte_parametre_1 %></div>
+            <%= @donnees.montant_parametre_1 %><br>
           </div>
           <div class="field">
             <%= form.radio_button :champ_1, @donnees.montant_parametre_2, disabled: @show_mode, class: "radio-button" %>
@@ -174,7 +173,7 @@
           </div>
           <div class="field">
             <b> Total à payer :</b>
-            <%= text_field_tag 'a_configurer', '', readonly: true, id: 'total-amount-field', class: 'text-field custom-text-field' %>
+            <%= form.text_field :champ_1, readonly: true, id: 'total-amount-field', class: 'text-field custom-text-field', data: { total_amount_target: "totalAmount" } %>
           </div>
         </div>
       </div>

@@ -143,16 +143,35 @@
           <h2> Votre cotisation </h2>
 
           <div class="field">
-            <div class="sixp">
-              <b> Cotisation de base : </b>
-            </div>
-            <div class="quatrep">
-              <b> <%= donnees.montant_parametre_1 %> </b>
-            </div>
-            <%= form.hidden_field :champ_1, value: donnees.montant_parametre_1 %>
-          </div>
-          <div class="petit2">
-            <p> La part variable de la cotisation <b>(0,70 % des rémunérations brutes déclarées) </b> est perçue par la Caisse de Congés Payés</p>
+            <script type="module" src="/assets/coiffeurs.js"></script>
+            <%= form.label :cotisation, "Salon sans salarié ou Coiffure à domicile " %>
+            <%= form.check_box :checkbox_1, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_1 } %>
+            <%= "#{ donnees.montant_parametre_1 }€" %><br>
+
+            <%= form.label :cotisation, "Salon jusqu'à 4 salariés inclus " %>
+            <%= form.check_box :checkbox_2, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_2 } %>
+            <%= "#{ donnees.montant_parametre_2 }€" %><br>
+
+            <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
+            <%= form.check_box :checkbox_3, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_3 }%>
+            <%= "#{ donnees.montant_parametre_3 }€" %><br>
+
+            <%= form.label :cotisation, "Cotisation par Salon supplémentaire " %>
+            <%= form.number_field :champ_1, class: 'form-control', id: 'amount-to-multiply', readonly: @show_mode, disabled: @show_mode, data: { multiply_amount: donnees.montant_parametre_4 } %>
+            <%= "#{ donnees.montant_parametre_4 }€"%>
+            <%= form.text_field :champ_2, readonly: true, id: 'Multiply-amount-field', readonly: @show_mode, disabled: @show_mode %>
+            <br>
+
+            <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
+            <%= form.check_box :checkbox_4, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_5 } %>
+            <%= "#{ donnees.montant_parametre_5 }€" %><br>
+
+            <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
+            <%= form.check_box :checkbox_5, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_6 } %>
+            <%= "#{ donnees.montant_parametre_6 }€" %><br>
+
+            <%= label_tag 'total_amount', 'Total à payer : ' %>
+            <%= text_field_tag 'adherent[cotisation]', '', readonly: true, id: 'total-amount-field', readonly: @show_mode, disabled: @show_mode %>
           </div>
         </div>
 

@@ -1,11 +1,7 @@
 <div class="flex flex-col">
   <div class="flex justify-between items-center">
-    <%= javascript_include_tag "scroll_down", type: :module %>
-    <%= javascript_include_tag "forme_juridique", type: :module %>
-
-
     <%= link_to "Retour", request.referer, class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4", data: { turbo: false } %>
-    <%= button_tag "Bas de la page", id: "scroll-to-bottom-button", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4 place-self-start" %>
+    <%= button_tag "Bas de la page", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4 place-self-start", data: { controller: "scroll-down", action: "click->scroll-down#scrollDown", target: "scroll-down.button"  } %>
   </div>
 
   <% corporation_id = params[:corporation_id] %>
@@ -25,3 +21,8 @@
     <% redirect_to root_path %>
   <% end %>
 </div>
+
+
+
+
+

@@ -72,3 +72,4 @@ gem "tailwindcss-rails", "~> 2.4"
 gem 'grover', '~> 1.1.7'
 gem 'devise', '~> 4.9'
 
+

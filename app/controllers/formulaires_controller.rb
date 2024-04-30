@@ -37,8 +37,9 @@ class FormulairesController < ApplicationController
   def create
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])
-    @formulaire = @adherent.formulaires.build(formulaire_params)
+    @selected_year = session[:selected_year]
     @formulaire.annee = @selected_year
+    @formulaire = @adherent.formulaires.build(formulaire_params)
     if @formulaire.save
       redirect_to @corporation, notice: "Formulaire créé avec succès"
     else

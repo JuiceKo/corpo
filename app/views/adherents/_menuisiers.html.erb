@@ -1,5 +1,6 @@
 <div class="AIO">
   <%= javascript_include_tag "forme_juridique", type: :module %>
+  <%= javascript_include_tag "cotisation", type: :module %>
   <%= form_with(model: [@corporation, @adherent], url: create_avec_adherent_corporation_adherents_path(@corporation), local: true) do |formulaire| %>
     <%= stylesheet_link_tag "corporation" %>
     <%= fields_for :formulaire do |form| %>
@@ -13,8 +14,10 @@
               <img class="img-img-droite" src="data:image/png;base64,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" alt="Grapefruit slice atop a pile of other slices" />
             </div>
           </div>
-          <h1> <%= donnees.nom_formulaire %> <%= session[:selected_year] %> </h1>
+          <h1> <%= donnees.nom_formulaire %> <%= session[:selected_year] %> <%= donnees.annee %></h1>
         </div>
+
+        afreu
 
         <!---------------------------------- PART 1 --------------------------------------------->
 
@@ -141,22 +144,23 @@
 
         <div class="part part4">
           <h2> Votre cotisation </h2>
-          <p> Cotisation de base (part corporation <%= donnees.montant_parametre_1 %> + part CAPEB <%= donnees.montant_parametre_2 %> + abonnement bâtiment artisanal <%= donnees.montant_parametre_3 %>) </p>
+          <script type="module" src="/assets/cotisation.js"></script>
+          <%= hidden_field_tag 'montant_parametre_4', donnees.montant_parametre_4 %>
+          <%= hidden_field_tag 'montant_parametre_5', donnees.montant_parametre_5 %>
+          <%= "Cotisation de base (part corporation #{ donnees.montant_parametre_1 } + part CAPEB #{ donnees.montant_parametre_2 } + abonnement bâtiment artisanal #{ donnees.montant_parametre_3 }) " %>
           <br>
-          <%= form.label :cotisation, "Part variable, entreprise non bâtiment " %>
-          <%= form.number_field :champ_1, readonly: @show_mode, disabled: @show_mode %>
-          <p> Salarié(e)s x <%= donnees.montant_parametre_4 %> €</p>
-          <%= form.text_field :champ_2, readonly: true, id: 'Multiply-amount-field-ebe' %>
+          <%= "Part variable, entreprise non bâtiment " %>
+          <%= form.number_field :champ_4, class: 'form-control', id: 'amount-to-multiply-ebe', readonly: @show_mode, disabled: @show_mode %>
+          <%= "Salarié(e)s x #{donnees.montant_parametre_4}" %>
+          <%= form.text_field :champ_1, readonly: true, id: 'Multiply-amount-field-ebe' %>
 
           <%= form.label :cotisation, "Part variable, entreprise non bâtiment " %>
-          <%= form.number_field :champ_3 , readonly: @show_mode, disabled: @show_mode %>
-          <p> Salarié(e)s x <%= donnees.montant_parametre_5 %> </p>
-          <%= form.text_field  :champ_4, readonly: true, id: 'Multiply-amount-field-ebe-2' %>
+          <%= form.number_field :champ_5, class: 'form-control', id: 'amount-to-multiply-ebe-2', readonly: @show_mode, disabled: @show_mode %>
+          <%= "Apprenti(e)s x #{donnees.montant_parametre_5}" %>
+          <%= form.text_field  :champ_2, readonly: true, id: 'Multiply-amount-field-ebe-2' %>
 
-          <b><%= label_tag 'total_amount', 'Total à payer :' %> </b>
-          <%= text_field_tag 'adherent[cotisation]', '', readonly: true, id: 'total-amount-field' %>
-
-          <p> La part variable de la cotisation (0,70% de la masse salariale, dont 0,20% reversé à la CAPEB) est perçue par la Caisse de Congés Payés</p>
+          <%= label_tag 'total_amount', 'Total à payer :' %>
+          <%= form.text_field :champ_3,  readonly: true, id: 'total-amount-field' %>
 
         </div>
 
