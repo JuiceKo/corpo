@@ -143,37 +143,48 @@
           <h2> Votre cotisation </h2>
 
           <div class="field">
-            <script type="module" src="/assets/coiffeurs.js"></script>
+            <script type="module" src="/assets/estheticienne.js"></script>
             <%= form.label :cotisation, "Salon sans salarié ou Coiffure à domicile " %>
-            <%= form.check_box :checkbox_6, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_1 } %>
+            <%= form.check_box :checkbox_2, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_1 } %>
             <%= "#{ donnees.montant_parametre_1 }€" %><br>
 
             <%= form.label :cotisation, "Salon jusqu'à 4 salariés inclus " %>
-            <%= form.check_box :checkbox_2, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_2 } %>
+            <%= form.check_box :checkbox_3, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_2 } %>
             <%= "#{ donnees.montant_parametre_2 }€" %><br>
 
-            <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
-            <%= form.check_box :checkbox_3, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_3 }%>
-            <%= "#{ donnees.montant_parametre_3 }€" %><br>
-
             <%= form.label :cotisation, "Cotisation par Salon supplémentaire " %>
-            <%= form.number_field :champ_1, class: 'form-control', id: 'amount-to-multiply', readonly: @show_mode, disabled: @show_mode, data: { multiply_amount: donnees.montant_parametre_4 } %>
-            <%= "#{ donnees.montant_parametre_4 }€"%>
+            <%= form.number_field :champ_1, class: 'form-control', id: 'amount-to-multiply', readonly: @show_mode, disabled: @show_mode, data: { multiply_amount: donnees.montant_parametre_3 } %>
+            <%= "#{ donnees.montant_parametre_3 }€"%>
             <%= form.text_field :champ_2, readonly: true, id: 'Multiply-amount-field', readonly: @show_mode, disabled: @show_mode %>
             <br>
-
-            <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
-            <%= form.check_box :checkbox_4, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_5 } %>
-            <%= "#{ donnees.montant_parametre_5 }€" %><br>
-
-            <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
-            <%= form.check_box :checkbox_5, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: donnees.montant_parametre_6 } %>
-            <%= "#{ donnees.montant_parametre_6 }€" %><br>
 
             <%= label_tag 'total_amount', 'Total à payer : ' %>
             <%= form.text_field :champ_3 , readonly: true, id: 'total-amount-field', readonly: @show_mode, disabled: @show_mode %>
           </div>
         </div>
+
+
+        <div class="part part4">
+          <h2 class="copama"> Votre cotisation </h2>
+          <p class="petit"> **Cotisation calculée en fonction du nombre de salariés - hors apprenti(s) - en production (boulangerie, pâtisserie, viennoiserie ...)</p>
+
+          <div class="l">
+            <div class="sixp column">
+              <p>Cotisation <b><%= donnees.texte_parametre_1  %></b></p> <br>
+              <p>Cotisation pour <b><%= donnees.texte_parametre_2  %></b></p> <br>
+              <p>Cotisation pour <b><%= donnees.texte_parametre_3  %></b></p> <br>
+              <p>Cotisation pour <b><%= donnees.texte_parametre_4  %></b></p>
+            </div>
+            <div class="quatrep column">
+              <p> <%= form.check_box :checkbox_2, disabled: @show_mode %>  <b> <%= donnees.montant_parametre_1  %> </b></p>
+              <p> <%= form.check_box :checkbox_3, disabled: @show_mode %>  <b> <%= donnees.montant_parametre_2  %> </b></p>
+              <p> <%= form.check_box :checkbox_4, disabled: @show_mode %> <b> <%= donnees.montant_parametre_3  %> </b></p>
+              <p> <%= form.check_box :checkbox_5, disabled: @show_mode %>  <b> <%= donnees.montant_parametre_4  %> </b></p>
+            </div>
+          </div>
+        </div>
+
+
 
         <!---------------------------------- PART 5 --------------------------------------------->
 

@@ -296,7 +296,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
-  grover (~> 1.1.7)
+  grover
   importmap-rails
   jbuilder
   mysql2 (~> 0.5.2)

@@ -17,6 +17,8 @@
     <%= render partial: 'menuisiers' %>
   <% elsif corporation_id == '5'%>
     <%= render partial: 'copama' %>
+  <% elsif corporation_id == '6'%>
+    <%= render partial: 'estheticiennes' %>
   <% else %>
     <% redirect_to root_path %>
   <% end %>

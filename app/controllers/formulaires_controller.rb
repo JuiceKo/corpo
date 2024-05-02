@@ -9,8 +9,8 @@ class FormulairesController < ApplicationController
     @formulaire = @adherent.formulaires.find_by(annee: @annee)
     @donnees = Donnee.where(corporation_id: @corporation.id).where("annee <= ?", @annee).order(annee: :desc).first
     @show_mode = true
-    if params[:telecharger]
-      html = render_to_string(template: "formulaires/show", formats: [:html])
+    if params[:telecharger] == "true"
+      html = render_to_string(template: "formulaires/show", layout: 'coporation', formats: [:html])
       grover = Grover.new(html,
                           scale: 0.40,
                           encoding: 'utf8',
@@ -19,7 +19,12 @@ class FormulairesController < ApplicationController
                             args: ["--no-sandbox"]
                           })
       pdf = grover.to_pdf
-      send_data pdf, filename: "formulaire_#{@annee}.pdf", type: 'application/pdf', disposition: 'inline'
+      send_data(
+        pdf,
+        filename: "formulaire_#{params[:annee]}.pdf",
+        type: "application/pdf",
+        disposition: "attachment"
+      )
     end
   end
 
@@ -89,7 +94,7 @@ class FormulairesController < ApplicationController
   private
 
   def formulaire_params
-    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee, :checkbox_1, :code_naf_ape,  :checkbox_2,  :checkbox_3, :checkbox_4, :checkbox_5, :champ_1, :champ_2, :champ3)
+    params.require(:formulaire).permit(:raison_sociale, :nom_prenom, :adresse, :cp_ville, :telephone, :portable, :email, :statut, :forme_juridique, :siret, :nb_salaries, :nb_apprentis, :mode_paiement, :lieu, :date, :titulaire_compte, :adresse_sepa, :cp_ville_sepa, :iban_sepa, :bic_sepa, :lieu_date_sepa, :annee, :checkbox_1, :code_naf_ape,  :checkbox_2,  :checkbox_3, :checkbox_4, :checkbox_5, :champ_1, :champ_2, :champ3, :checkbox_6)
   end
 
 end

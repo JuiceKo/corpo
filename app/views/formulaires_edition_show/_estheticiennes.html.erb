@@ -1,8 +1,9 @@
 <%= stylesheet_link_tag "corporation" %>
+<%= javascript_include_tag "forme_juridique", type: :module %>
 
 <html>
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 <div class="AIO">
   <%= form_with(model: [@corporation, @adherent, @formulaire], url: corporation_adherent_formulaire_path(@corporation, @adherent, @formulaire), method: :patch) do |form| %>
@@ -99,16 +100,17 @@
 
     <div class="part3">
       <h2 class="copama"> Votre entreprise</h2>
-      <div class="form-options" data-controller="forme-juridique">
+      <div class="form-options">
         <%= form.label :forme_juridique, "Forme juridique :" %>
-        <%= form.radio_button :forme_juridique, 'Ent. ind.', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> Ent. ind.<br>
-        <%= form.radio_button :forme_juridique, 'EIRL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> EIRL<br>
-        <%= form.radio_button :forme_juridique, 'EURL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> EURL<br>
-        <%= form.radio_button :forme_juridique, 'SARL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> SARL<br>
-        <%= form.radio_button :forme_juridique, 'SAS', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> SAS<br>
-        <%= form.radio_button :forme_juridique, 'SASU', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode, data: { 'forme-juridique-target': 'radio' } %> SASU<br>
-        <p data-action="change->forme-juridique#toggleTextField" data-forme-juridique-target="autre"> <%= form.radio_button :forme_juridique, 'Autre', class: 'form-check-input', id: 'autre-option', readonly: @show_mode, disabled: @show_mode  %> Autre : </p>
-        <p data-action="a_definir" data-forme-juridique-target="textField" ><%= form.text_field :forme_juridique, class: 'text-field custom-text-field autre_option-text', disabled: true, data: { controller: "forme-juridique",  target_id: "forme-juridique.textField" } %></p>
+        <%= form.radio_button :forme_juridique, 'Ent. ind.', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> Ent. ind.<br>
+        <%= form.radio_button :forme_juridique, 'EIRL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> EIRL<br>
+        <%= form.radio_button :forme_juridique, 'EURL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> EURL<br>
+        <%= form.radio_button :forme_juridique, 'SARL', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SARL<br>
+        <%= form.radio_button :forme_juridique, 'SAS', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SAS<br>
+        <%= form.radio_button :forme_juridique, 'SASU', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SASU<br>
+        <%= form.radio_button :forme_juridique, 'Autre', class: 'form-check-input', id: 'autre-option', readonly: @show_mode, disabled: @show_mode %> Autre :
+        <%= form.text_field :forme_juridique, { class: 'text-field custom-text-field autre_option-text', id:'autre_option-text', disabled: true }%>
+
       </div>
 
 
@@ -145,37 +147,28 @@
       <h2> Votre cotisation </h2>
 
       <div class="field">
-        <script type="module" src="/assets/coiffeurs.js"></script>
-        <%= form.label :checkbox_6, "Salon sans salarié ou Coiffure à domicile " %>
-        <%= form.check_box :checkbox_6, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: @donnees.montant_parametre_1 } %>
-        <%= "#{ @donnees.montant_parametre_1 }€" %><br>
+        <script type="module" src="/assets/adherents.js"></script>
+        <%= form.label :checkbox_2, "Salon sans salarié ou Coiffure à domicile " %>
+        <%= form.check_box :checkbox_2, class: 'form-check-input amount-radio-esthe', disabled: @show_mode %>
+        <%= "#{ @donnees.montant_parametre_1}" %> <br>
 
-        <%= form.label :cotisation, "Salon jusqu'à 4 salariés inclus " %>
-        <%= form.check_box :checkbox_2, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: @donnees.montant_parametre_2 } %>
-        <%= "#{ @donnees.montant_parametre_2 }€" %><br>
-
-        <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
-        <%= form.check_box :checkbox_3, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: @donnees.montant_parametre_3 }%>
-        <%= "#{ @donnees.montant_parametre_3 }€" %><br>
+        <%= form.label :checkbox_3, "Salon jusqu'à 4 salariés inclus " %>
+        <%= form.check_box :checkbox_3, '170', class: 'form-check-input amount-radio-esthe',  disabled: @show_mode %>
+        <%= "#{ @donnees.montant_parametre_2}" %><br>
 
         <%= form.label :cotisation, "Cotisation par Salon supplémentaire " %>
-        <%= form.number_field :champ_1, class: 'form-control', id: 'amount-to-multiply', readonly: @show_mode, disabled: @show_mode, data: { multiply_amount: @donnees.montant_parametre_4 } %>
-        <%= "#{ @donnees.montant_parametre_4 }€"%>
-        <%= form.text_field :champ_2, readonly: true, id: 'Multiply-amount-field', readonly: @show_mode, disabled: @show_mode %>
+        <%= number_field_tag 'amount_to_multiply-esthe', '', class: 'form-control', id: 'amount-to-multiply-esthe', readonly: @show_mode, disabled: @show_mode %>
+        <%= "#{ @donnees.montant_parametre_3}" %>
+        <%= text_field_tag 'Multiply-amount-field-esthe', '', readonly: true, id: 'Multiply-amount-field-esthe' %>
+        <%= label_tag 'total_amount', '€' %>
         <br>
 
-        <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
-        <%= form.check_box :checkbox_4, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: @donnees.montant_parametre_5 } %>
-        <%= "#{ @donnees.montant_parametre_5 }€" %><br>
-
-        <%= form.label :cotisation, "Salon au-delà de 4 salariés " %>
-        <%= form.check_box :checkbox_5, class: 'amount-checkbox', readonly: @show_mode, disabled: @show_mode, data: { amount: @donnees.montant_parametre_6 } %>
-        <%= "#{ @donnees.montant_parametre_6 }€" %><br>
-
         <%= label_tag 'total_amount', 'Total à payer : ' %>
-        <%= form.text_field :champ_3, readonly: true, id: 'total-amount-field', readonly: @show_mode, disabled: @show_mode %>
+        <%= text_field_tag 'adherent[cotisation]', '', readonly: true, id: 'total-amount-field-esthe' %>
+        <%= label_tag 'total_amount', '€' %>
       </div>
     </div>
+    <br>
 
     <!---------------------------------- PART 5 --------------------------------------------->
 
@@ -229,9 +222,6 @@
 
     <div class="page-break"></div>
 
-    <!---------------------------------- PART 6 --------------------------------------------->
-
-
     <div class="part6 boulanger">
       <h3 class="p2-h3"> Politique de confidentialié du traitement des données personnelles : </h3>
       <br>
@@ -251,7 +241,6 @@
       <%= form.label :checkbox_1, "Je déclare accepter la transmission de mes données personnelles à des partenaires de la coporation uniquement aux fins de campagnes d'information, d'enquêtes, de publication dans des annuaires professionnels, ou de diffusion de brochures pour bénéficier d'avantages tarifaires. ", class:"cb-bas" %>
     </div>
 
-    <!---------------------------------- PART 7 --------------------------------------------->
 
 
     <div class="part7 boulanger2">
@@ -375,11 +364,9 @@
         </div>
       </div>
     </div>
-
     <% unless @show_mode %>
-      <%= form.submit "Enregistrer les modifications" , class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 disabled:cursor-not-allowed mt-4"%>
+      <%= form.submit "Enregistrer les modifications", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 disabled:cursor-not-allowed mt-4" %>
     <% end %>
-
   <% end %>
 </div>
 </html>
