@@ -1,4 +1,5 @@
 class CorporationsController < ApplicationController
+  require 'csv'
 
   def index
     @corporations = Corporation.all
@@ -50,6 +51,85 @@ class CorporationsController < ApplicationController
       flash.now[:alert] = 'Erreur lors de la mise à jour de la corporation.'
       render :edit    end
   end
+
+  def nettoyer_chaine(chaine)
+    return chaine if chaine.nil?
+    chaine.gsub!(/\p{Cntrl}/, '')
+    chaine.strip!
+    chaine
+  end
+
+  def import
+    file = params[:file].tempfile
+    options = { headers: true, col_sep: ';' }
+
+    CSV.foreach(file, **options) do |row|
+      user_hash = {}
+      user_hash[:nom_prenom] = row['Nom']
+      user_hash[:email] = row['E-mail']
+      user_hash[:raison_sociale] = row['Raison Sociale']
+      user_hash[:adresse] = row['Adresse']
+      user_hash[:cp_ville] = "#{row['Code Postal']} #{row['Commune']}"
+      user_hash[:portable] = row['Numéro Téléphone Portable']
+      user_hash[:telephone] = row['Numéro Téléphone']
+      user_hash[:siret] = row['N° SIRET']
+      user_hash[:annee] = row['année']
+      user_hash[:forme_juridique] = row ['Forme Juridique']
+
+      existing_adherent = Adherent.find_by(nom: row['Nom'], corporation_id: row['Corporation'])
+
+      if existing_adherent
+        formulaire = Formulaire.new(user_hash.merge(adherent_id: existing_adherent.id))
+        existing_formulaire = existing_adherent.formulaires.where(annee: row['année'])
+        if existing_formulaire.empty?
+          if formulaire.save
+            puts "Formulaire sauvegardé avec succès pour l'adhérent existant : #{existing_adherent.id}"
+          else
+            puts "Erreur lors de la sauvegarde du formulaire pour l'adhérent existant"
+          end
+        else
+          puts "Le formulaire pour l'adhérent existant existe déjà"
+        end
+
+      else
+        puts "Aucun adhérent avec le même nom et la même corporation n'existe pas"
+        nouvel_adherent = Adherent.new(nom: row['Nom'], corporation_id: row['Corporation'])
+
+        if nouvel_adherent.save
+          puts "Nouvel adhérent créé avec succès : #{nouvel_adherent.id}"
+          formulaire = Formulaire.new(user_hash.merge(adherent_id: nouvel_adherent.id))
+
+          if formulaire.save
+            puts "Formulaire sauvegardé avec succès pour le nouvel adhérent : #{nouvel_adherent.id}"
+          else
+            puts "Erreur lors de la sauvegarde du formulaire pour le nouvel adhérent"
+          end
+        else
+          puts "Erreur lors de la création du nouvel adhérent"
+        end
+      end
+    end
+    redirect_to root_path, notice: "Les données ont été importées avec succès."
+  end
+
+
+  # à tester
+  #
+  #def self.import(file)
+  #  CSV.foreach(file.path, headers:true) do |row|
+  #    parent = Parent.find_or_create_by(
+  #      name: row["parent_1_firstname"] + row["parent_1_lastname"],
+  #      address: row["address"],
+  #    # ...
+  #      )
+
+  #    parent.children.find_or_create_by(
+  #      name: row["childfirstname"] + row["childlastname"],
+  #      birthday: row["childdateofbirth"],
+  #    # ...
+  #      )
+  #  end
+  # end
 
   private
 

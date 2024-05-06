@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root "corporations#index"
 
   resources :corporations do
+    post 'import', on: :collection
     post 'corporations/save_year', to: 'corporations#save_year', as: 'save_year_corporations'
     resources :adherents do
       get :new_avec_adherent, on: :collection

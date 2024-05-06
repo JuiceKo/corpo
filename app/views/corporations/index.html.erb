@@ -11,6 +11,13 @@
     </div>
   </div>
 
+  <%= form_with url:  import_corporations_path(@corporation), multipart: true, method: :post, class: "flex flex-row" do |form| %>
+    <div class="flex flex-row items-center mb-2 ">
+      <%= form.file_field :file, accept: ".csv" %>
+      <%= form.button "Importer ▶️", class: "boutton-importer" %>
+    </div>
+  <% end %>
+
   <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">

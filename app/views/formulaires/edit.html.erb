@@ -17,6 +17,8 @@
     <%= render partial: 'formulaires_edition_show/menuisiers' %>
   <% elsif corporation_id == '5'%>
     <%= render partial: 'formulaires_edition_show/copama' %>
+  <% elsif corporation_id == '5'%>
+    <%= render partial: 'formulaires_edition_show/estheticiennes' %>
   <% else %>
     <% redirect_to root_path %>
   <% end %>

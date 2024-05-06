@@ -19,6 +19,8 @@
     <%= render partial: 'formulaires_creation/menuisiers' %>
   <% elsif corporation_id == '5'%>
     <%= render partial: 'formulaires_creation/copama' %>
+  <% elsif corporation_id == '5'%>
+    <%= render partial: 'formulaires_creation/estheticiennes' %>
   <% else %>
       <% redirect_to root_path %>
   <% end %>
