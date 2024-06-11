@@ -19,7 +19,7 @@ class CorporationsController < ApplicationController
     session[:selected_year] = @selected_year
 
     if params[:show_all_adherents] == "1"
-      @adherents = @corporation.adherents.includes(:formulaires)
+      @adherents = @q.result(distinct: true).includes(:formulaires)
     else
       @adherents = @q.result(distinct: true).includes(:formulaires).select do |adherent|
         adherent.formulaires.any? { |formulaire| formulaire.annee == @selected_year }
@@ -35,6 +35,9 @@ class CorporationsController < ApplicationController
 
   def edit
     @corporation = Corporation.find(params[:id])
+    @selected_year = params[:selected_year] || Time.now.year
+    session[:selected_year] = @selected_year
+    @donnees = @corporation.donnees.where(annee: params[:selected_year])
   end
 
   def select_year
@@ -49,7 +52,8 @@ class CorporationsController < ApplicationController
       redirect_to root_path, notice: 'Corporation mise à jour avec succès.'
     else
       flash.now[:alert] = 'Erreur lors de la mise à jour de la corporation.'
-      render :edit    end
+      render :edit
+    end
   end
 
   def nettoyer_chaine(chaine)
@@ -112,24 +116,6 @@ class CorporationsController < ApplicationController
     redirect_to root_path, notice: "Les données ont été importées avec succès."
   end
 
-
-  # à tester
-  #
-  #def self.import(file)
-  #  CSV.foreach(file.path, headers:true) do |row|
-  #    parent = Parent.find_or_create_by(
-  #      name: row["parent_1_firstname"] + row["parent_1_lastname"],
-  #      address: row["address"],
-  #    # ...
-  #      )
-
-  #    parent.children.find_or_create_by(
-  #      name: row["childfirstname"] + row["childlastname"],
-  #      birthday: row["childdateofbirth"],
-  #    # ...
-  #      )
-  #  end
-  # end
 
   private
 

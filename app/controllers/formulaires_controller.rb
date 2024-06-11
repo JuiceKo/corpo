@@ -10,7 +10,7 @@ class FormulairesController < ApplicationController
     @donnees = Donnee.where(corporation_id: @corporation.id).where("annee <= ?", @annee).order(annee: :desc).first
     @show_mode = true
     if params[:telecharger] == "true"
-      html = render_to_string(template: "formulaires/show", layout: 'coporation', formats: [:html])
+      html = render_to_string(template: "formulaires/show", formats: [:html])
       grover = Grover.new(html,
                           scale: 0.40,
                           encoding: 'utf8',
@@ -27,7 +27,7 @@ class FormulairesController < ApplicationController
       )
     end
   end
-
+  
   def new
     @corporation = Corporation.find(params[:corporation_id])
     @adherent = Adherent.find(params[:adherent_id])

@@ -1,7 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
     const showAllAdherentsCheckbox = document.getElementById('show_all_adherents');
 
-    showAllAdherentsCheckbox.addEventListener('change', function() {
-        document.getElementById('filter-form').submit();
-    });
+    if (showAllAdherentsCheckbox) {
+        showAllAdherentsCheckbox.addEventListener('change', function() {
+            document.getElementById('combined-form').submit();
+        });
+    }
 });

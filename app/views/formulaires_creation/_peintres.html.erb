@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "corporation" %>
+<%= javascript_include_tag "forme_juridique", type: :module %>
 
 <div class="AIO">
   <%= form_with(model: [@corporation, @adherent, @formulaire], url: corporation_adherent_formulaires_path(@corporation, @adherent), local: true) do |form| %>
@@ -107,7 +108,6 @@
         <%= form.radio_button :forme_juridique, 'SASU', class: 'form-check-input', readonly: @show_mode, disabled: @show_mode %> SASU<br>
         <%= form.radio_button :forme_juridique, 'Autre', class: 'form-check-input', id: 'autre-option', readonly: @show_mode, disabled: @show_mode %> Autre :
         <%= form.text_field :forme_juridique, { class: 'text-field custom-text-field autre_option-text', id:'autre_option-text', disabled: true }%>
-
       </div>
 
 

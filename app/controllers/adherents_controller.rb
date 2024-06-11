@@ -57,3 +57,4 @@ class AdherentsController < ApplicationController
   end
 
 end
+

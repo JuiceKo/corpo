@@ -1,9 +1,11 @@
 <%= stylesheet_link_tag "corporation" %>
+<%= javascript_include_tag "forme_juridique", type: :module %>
 
 <html>
 <head>
   <meta charset="UTF-8">
 </head>
+
 <div class="AIO">
   <%= form_with(model: [@corporation, @adherent, @formulaire], url: corporation_adherent_formulaires_path(@corporation, @adherent), local: true) do |form| %>
     <div class="haut">

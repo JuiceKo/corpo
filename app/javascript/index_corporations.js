@@ -8,3 +8,4 @@ window.updateShowButton = function(selectElement) {
         showButton.setAttribute('href', newHref);
     }
 }
+
